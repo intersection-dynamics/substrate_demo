@@ -1,0 +1,81 @@
+{
+  "equil_sweep": 50,
+  "fluctuations": {
+    "M": {
+      "mean": -0.0001220703125,
+      "std": 0.0010458227534474558,
+      "relative_std": 8.567372977849613,
+      "min": -0.001953125,
+      "max": 0.001953125,
+      "range": 0.00390625,
+      "n_samples": 20,
+      "drift": 0.4999994880005242,
+      "autocorr_time": 1
+    },
+    "M_abs": {
+      "mean": 0.0008544921875,
+      "std": 0.0006152149984547926,
+      "relative_std": 0.7199772396480437,
+      "min": 0.0,
+      "max": 0.001953125,
+      "range": 0.001953125,
+      "n_samples": 20,
+      "drift": 0.18749997600000295,
+      "autocorr_time": 1
+    },
+    "n_walls": {
+      "mean": 128.05,
+      "std": 0.2179449471770337,
+      "relative_std": 0.0017020300443331784,
+      "min": 128,
+      "max": 129,
+      "range": 1,
+      "n_samples": 20,
+      "drift": 0.0007812499999993453,
+      "autocorr_time": 1
+    },
+    "E_bind": {
+      "mean": -171943.3008220842,
+      "std": 140.0668328378855,
+      "relative_std": 0.0008146105848160815,
+      "min": -172238.31513725474,
+      "max": -171659.11858791712,
+      "range": 579.1965493376192,
+      "n_samples": 20,
+      "drift": 0.00024370163350532546,
+      "autocorr_time": 1
+    }
+  },
+  "thermal": {
+    "thermal_ratio": 0.3377868034891332,
+    "gaussian_p_value": 0.9932239637476371,
+    "is_thermal": true,
+    "variance": 19618.717661236158,
+    "thermal_scale": 414.66046450329
+  },
+  "spectrum": {
+    "freqs": [
+      0.0,
+      0.2,
+      0.4
+    ],
+    "power": [
+      3.366324685067141e-07,
+      2.279923825383232e-06,
+      1.3916208837927265e-06
+    ],
+    "slope": -0.7122193887735542,
+    "r_squared": 1.0,
+    "is_white": false
+  },
+  "interface": {
+    "initial_walls": 128,
+    "final_walls": 128,
+    "mean_walls": 128.05,
+    "std_walls": 0.2179449471770337,
+    "drift_rate": 0.03759398496240601,
+    "drift_p_value": 0.6765220917842534,
+    "is_stable": true
+  },
+  "classification": "dynamic_equilibrium"
+}

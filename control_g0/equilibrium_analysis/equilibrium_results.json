@@ -1,0 +1,81 @@
+{
+  "equil_sweep": 50,
+  "fluctuations": {
+    "M": {
+      "mean": 0.000341796875,
+      "std": 0.0006569152366735209,
+      "relative_std": 1.9219457301326937,
+      "min": -0.00048828125,
+      "max": 0.001953125,
+      "range": 0.00244140625,
+      "n_samples": 20,
+      "drift": 0.24999993600001646,
+      "autocorr_time": 1
+    },
+    "M_abs": {
+      "mean": 0.000537109375,
+      "std": 0.000509780591255398,
+      "relative_std": 0.9491185968286966,
+      "min": 0.0,
+      "max": 0.001953125,
+      "range": 0.001953125,
+      "n_samples": 20,
+      "drift": 0.16666663822222705,
+      "autocorr_time": 1
+    },
+    "n_walls": {
+      "mean": 3.0,
+      "std": 2.4083189157584592,
+      "relative_std": 0.8027729718927273,
+      "min": 0,
+      "max": 8,
+      "range": 8,
+      "n_samples": 20,
+      "drift": 0.14285714285204096,
+      "autocorr_time": 1
+    },
+    "E_bind": {
+      "mean": -105.4650116853295,
+      "std": 1.5156603431555191,
+      "relative_std": 0.014371214860111895,
+      "min": -109.30434830126842,
+      "max": -103.75289204975388,
+      "range": 5.551456251514537,
+      "n_samples": 20,
+      "drift": 7.311978246597372e-05,
+      "autocorr_time": 1
+    }
+  },
+  "thermal": {
+    "thermal_ratio": 0.14758685729582952,
+    "gaussian_p_value": 0.11394203964319599,
+    "is_thermal": true,
+    "variance": 2.2972262758143063,
+    "thermal_scale": 10.269615946340423
+  },
+  "spectrum": {
+    "freqs": [
+      0.0,
+      0.2,
+      0.4
+    ],
+    "power": [
+      1.6864967070850956e-07,
+      6.575097670124666e-07,
+      8.929624539613555e-07
+    ],
+    "slope": 0.44158719104334493,
+    "r_squared": 1.0,
+    "is_white": true
+  },
+  "interface": {
+    "initial_walls": 6,
+    "final_walls": 8,
+    "mean_walls": 3.0,
+    "std_walls": 2.4083189157584592,
+    "drift_rate": 0.0,
+    "drift_p_value": 1.0,
+    "is_stable": true
+  },
+  "classification": "dynamic_equilibrium"
+}

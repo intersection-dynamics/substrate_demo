@@ -1,0 +1,322 @@
+[
+  {
+    "condition": {
+      "experiment": "coarse_grain",
+      "cg": 1,
+      "path": "exp4_coarse_grain\\cg1"
+    },
+    "analysis": {
+      "equil_sweep": 50,
+      "fluctuations": {
+        "M": {
+          "mean": 0.0,
+          "std": 0.0011241078548067712,
+          "relative_std": 11241078.548067711,
+          "min": -0.001953125,
+          "max": 0.00146484375,
+          "range": 0.00341796875,
+          "n_samples": 20,
+          "drift": 1.9999959040083886,
+          "autocorr_time": "1"
+        },
+        "M_abs": {
+          "mean": 0.0009765625,
+          "std": 0.0005567262817866885,
+          "relative_std": 0.5700876541725932,
+          "min": 0.0,
+          "max": 0.001953125,
+          "range": 0.001953125,
+          "n_samples": 20,
+          "drift": 0.10526314654847777,
+          "autocorr_time": "1"
+        },
+        "n_walls": {
+          "mean": 128.0,
+          "std": 0.0,
+          "relative_std": 0.0,
+          "min": "128",
+          "max": "128",
+          "range": "0",
+          "n_samples": 20,
+          "drift": 0.0,
+          "autocorr_time": 20
+        },
+        "E_bind": {
+          "mean": -174437.8931896234,
+          "std": 2.486885016357881,
+          "relative_std": 1.4256564160944673e-05,
+          "min": -174443.52655070295,
+          "max": -174435.22523347806,
+          "range": 8.301317224890226,
+          "n_samples": 20,
+          "drift": 1.1563513560461118e-06,
+          "autocorr_time": "1"
+        }
+      },
+      "thermal": {
+        "thermal_ratio": 0.005954362753191821,
+        "gaussian_p_value": 0.07671858131760396,
+        "is_thermal": "False",
+        "variance": 6.184597084585336,
+        "thermal_scale": 417.65762675859685
+      },
+      "spectrum": {
+        "freqs": "[0.  0.2 0.4]",
+        "power": "[3.08838506e-07 2.41958773e-06 2.25173102e-06]",
+        "slope": -0.10372674716661442,
+        "r_squared": 1.0,
+        "is_white": "True"
+      },
+      "interface": {
+        "initial_walls": "128",
+        "final_walls": "128",
+        "mean_walls": 128.0,
+        "std_walls": 0.0,
+        "drift_rate": 0.0,
+        "drift_p_value": NaN,
+        "is_stable": true
+      },
+      "classification": "kinetic_arrest"
+    }
+  },
+  {
+    "condition": {
+      "experiment": "coarse_grain",
+      "cg": 2,
+      "path": "exp4_coarse_grain\\cg2"
+    },
+    "analysis": {
+      "equil_sweep": 50,
+      "fluctuations": {
+        "M": {
+          "mean": -0.0002197265625,
+          "std": 0.0013235484539482227,
+          "relative_std": 6.023613333444332,
+          "min": -0.0029296875,
+          "max": 0.00244140625,
+          "range": 0.00537109375,
+          "n_samples": 20,
+          "drift": 3.7999984435206375,
+          "autocorr_time": "1"
+        },
+        "M_abs": {
+          "mean": 0.0009521484375,
+          "std": 0.0009452373380178682,
+          "relative_std": 0.9927414692036621,
+          "min": 0.0,
+          "max": 0.0029296875,
+          "range": 0.0029296875,
+          "n_samples": 20,
+          "drift": 0.14285712892517144,
+          "autocorr_time": "1"
+        },
+        "n_walls": {
+          "mean": 128.0,
+          "std": 0.0,
+          "relative_std": 0.0,
+          "min": "128",
+          "max": "128",
+          "range": "0",
+          "n_samples": 20,
+          "drift": 0.0,
+          "autocorr_time": 20
+        },
+        "E_bind": {
+          "mean": -173503.59913534633,
+          "std": 56.40760295315308,
+          "relative_std": 0.00032510912300528545,
+          "min": -173592.09903446733,
+          "max": -173411.61397803412,
+          "range": 180.4850564332155,
+          "n_samples": 20,
+          "drift": 0.000276212703955301,
+          "autocorr_time": "1"
+        }
+      },
+      "thermal": {
+        "thermal_ratio": 0.13542018434092445,
+        "gaussian_p_value": 0.4566097458986971,
+        "is_thermal": "True",
+        "variance": 3181.817670920564,
+        "thermal_scale": 416.5376323159125
+      },
+      "spectrum": {
+        "freqs": "[0.  0.2 0.4]",
+        "power": "[5.23832462e-07 4.01195129e-06 3.77302835e-06]",
+        "slope": -0.08858114967107221,
+        "r_squared": 1.0,
+        "is_white": "True"
+      },
+      "interface": {
+        "initial_walls": "128",
+        "final_walls": "128",
+        "mean_walls": 128.0,
+        "std_walls": 0.0,
+        "drift_rate": 0.0,
+        "drift_p_value": NaN,
+        "is_stable": true
+      },
+      "classification": "dynamic_equilibrium"
+    }
+  },
+  {
+    "condition": {
+      "experiment": "coarse_grain",
+      "cg": 4,
+      "path": "exp4_coarse_grain\\cg4"
+    },
+    "analysis": {
+      "equil_sweep": 50,
+      "fluctuations": {
+        "M": {
+          "mean": -0.0001220703125,
+          "std": 0.0010458227534474558,
+          "relative_std": 8.567372977849613,
+          "min": -0.001953125,
+          "max": 0.001953125,
+          "range": 0.00390625,
+          "n_samples": 20,
+          "drift": 0.4999994880005242,
+          "autocorr_time": "1"
+        },
+        "M_abs": {
+          "mean": 0.0008544921875,
+          "std": 0.0006152149984547926,
+          "relative_std": 0.7199772396480437,
+          "min": 0.0,
+          "max": 0.001953125,
+          "range": 0.001953125,
+          "n_samples": 20,
+          "drift": 0.18749997600000295,
+          "autocorr_time": "1"
+        },
+        "n_walls": {
+          "mean": 128.05,
+          "std": 0.2179449471770337,
+          "relative_std": 0.0017020300443331784,
+          "min": "128",
+          "max": "129",
+          "range": "1",
+          "n_samples": 20,
+          "drift": 0.0007812499999993453,
+          "autocorr_time": "1"
+        },
+        "E_bind": {
+          "mean": -171943.3008220842,
+          "std": 140.0668328378855,
+          "relative_std": 0.0008146105848160815,
+          "min": -172238.31513725474,
+          "max": -171659.11858791712,
+          "range": 579.1965493376192,
+          "n_samples": 20,
+          "drift": 0.00024370163350532546,
+          "autocorr_time": "1"
+        }
+      },
+      "thermal": {
+        "thermal_ratio": 0.3377868034891332,
+        "gaussian_p_value": 0.9932239637476371,
+        "is_thermal": "True",
+        "variance": 19618.717661236158,
+        "thermal_scale": 414.66046450329
+      },
+      "spectrum": {
+        "freqs": "[0.  0.2 0.4]",
+        "power": "[3.36632469e-07 2.27992383e-06 1.39162088e-06]",
+        "slope": -0.7122193887735542,
+        "r_squared": 1.0,
+        "is_white": "False"
+      },
+      "interface": {
+        "initial_walls": "128",
+        "final_walls": "128",
+        "mean_walls": 128.05,
+        "std_walls": 0.2179449471770337,
+        "drift_rate": 0.03759398496240601,
+        "drift_p_value": 0.6765220917842534,
+        "is_stable": true
+      },
+      "classification": "dynamic_equilibrium"
+    }
+  },
+  {
+    "condition": {
+      "experiment": "coarse_grain",
+      "cg": 8,
+      "path": "exp4_coarse_grain\\cg8"
+    },
+    "analysis": {
+      "equil_sweep": 50,
+      "fluctuations": {
+        "M": {
+          "mean": -0.000341796875,
+          "std": 0.0006922581483768469,
+          "relative_std": 2.025348961549022,
+          "min": -0.00146484375,
+          "max": 0.00146484375,
+          "range": 0.0029296875,
+          "n_samples": 20,
+          "drift": 0.444444343308665,
+          "autocorr_time": "1"
+        },
+        "M_abs": {
+          "mean": 0.0005859375,
+          "std": 0.0005027163154778809,
+          "relative_std": 0.8579690319888685,
+          "min": 0.0,
+          "max": 0.00146484375,
+          "range": 0.00146484375,
+          "n_samples": 20,
+          "drift": 0.3999999453866741,
+          "autocorr_time": "1"
+        },
+        "n_walls": {
+          "mean": 128.0,
+          "std": 0.0,
+          "relative_std": 0.0,
+          "min": "128",
+          "max": "128",
+          "range": "0",
+          "n_samples": 20,
+          "drift": 0.0,
+          "autocorr_time": 20
+        },
+        "E_bind": {
+          "mean": -173847.43845688595,
+          "std": 465.4470106619876,
+          "relative_std": 0.0026773302775894387,
+          "min": -174293.54184654806,
+          "max": -172597.6978763797,
+          "range": 1695.8439701683528,
+          "n_samples": 20,
+          "drift": 0.0008544387054690101,
+          "autocorr_time": "1"
+        }
+      },
+      "thermal": {
+        "thermal_ratio": 1.116313295745793,
+        "gaussian_p_value": 0.013743337636648048,
+        "is_thermal": "True",
+        "variance": 216640.91973418038,
+        "thermal_scale": 416.9501630373658
+      },
+      "spectrum": {
+        "freqs": "[0.  0.2 0.4]",
+        "power": "[9.91760204e-08 5.66506590e-07 1.25178467e-06]",
+        "slope": 1.1438217665553185,
+        "r_squared": 1.0,
+        "is_white": "False"
+      },
+      "interface": {
+        "initial_walls": "128",
+        "final_walls": "128",
+        "mean_walls": 128.0,
+        "std_walls": 0.0,
+        "drift_rate": 0.0,
+        "drift_p_value": NaN,
+        "is_stable": true
+      },
+      "classification": "dynamic_equilibrium"
+    }
+  }
+]

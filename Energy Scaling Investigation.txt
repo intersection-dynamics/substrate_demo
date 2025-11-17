@@ -1,0 +1,246 @@
+# Energy Scaling Investigation
+
+## The Issue
+
+From your validation results, energy per site increases with system size:
+
+| L | E_bind | E_bind/site |
+|---|--------|-------------|
+| 48 | -54,679 | -23.7 |
+| 64 | -174,437 | -42.6 |
+| 96 | -885,095 | -96.0 |
+
+For an extensive quantity, E_bind/site should be **constant**, but it's **increasing linearly with L**.
+
+---
+
+## Why This Matters
+
+**For stripe interface energy:**
+- Total interface length = walls × L
+- If E_bind is purely interface: E ~ L (not L²)
+- Then E/site ~ L/L² = 1/L (decreases with L)
+
+**For bulk energy:**
+- E ~ L² (extensive)
+- Then E/site ~ L²/L² = constant
+
+**What we observe:**
+- E/site ~ L (increases linearly!)
+- This suggests E ~ L³ (super-extensive!)
+
+**This is weird and needs investigation.**
+
+---
+
+## Possible Causes
+
+### 1. FFT Normalization Issue (Most Likely)
+
+**Problem:** The FFT Poisson solver might have size-dependent normalization that scales as L.
+
+**How to check:**
+- Solve Poisson equation for known analytical case
+- Compare numerical vs analytical solution
+- See if error scales with L
+
+**Fix if this is it:**
+- Add proper normalization factor to FFT solver
+- Likely need to divide by L or L² somewhere
+
+### 2. Non-Local Defrag Contribution
+
+**Problem:** The defrag potential ∇²Φ = s might have long-range contributions that grow super-extensively.
+
+**Physical interpretation:**
+- Each point couples to all other points via 1/r potential
+- Sum over all pairs ~ L² points × L² points = L⁴ contributions
+- But with 1/r decay, should reduce to L² or L³
+
+**How to check:**
+- Look at Φ(x) spatial profile
+- Check if Φ grows with L
+- Measure correlation length of Φ
+
+### 3. Implementation Bug
+
+**Problem:** Some part of energy calculation has wrong scaling.
+
+**How to check:**
+- Manually verify energy calculation
+- Check if using correct units/normalization
+- Test with simple known configurations
+
+---
+
+## What The Investigation Script Does
+
+`investigate_energy_scaling.py` will:
+
+### Test 1: FFT Normalization Check
+
+Solves Poisson equation for:
+```
+s(x,y) = sin(2πx/L) sin(2πy/L)
+```
+
+Analytical solution known:
+```
+Φ = -s / (2k²) where k = 2π/L
+```
+
+If numerical ≠ analytical: FFT normalization is wrong!
+
+### Test 2: Detailed Energy Analysis
+
+For L = 32, 48, 64, 96:
+- Compute total E_defrag
+- Track E_defrag/site, E_defrag/L, E_defrag/wall
+- Measure max(Φ), max(∇Φ)
+- Check which quantities are constant
+
+### Test 3: Scaling Hypothesis Testing
+
+Fits log(E) vs log(L):
+- If slope ≈ 1: Interface energy (E ~ L)
+- If slope ≈ 2: Bulk energy (E ~ L²) 
+- If slope ≈ 3: Super-extensive (problem!)
+
+### Test 4: Visualization
+
+Creates plots showing:
+- E vs L² (should be linear if extensive)
+- E/site vs L (should be constant if extensive)
+- Comparison to different scaling models
+
+---
+
+## How to Run
+
+```bash
+python investigate_energy_scaling.py
+```
+
+**Runtime:** ~30 minutes
+
+**Output:**
+- `energy_scaling_analysis/energy_scaling_results.csv` - Numerical data
+- `energy_scaling_analysis/energy_scaling_plots.png` - Diagnostic plots
+- Terminal output with scaling analysis
+
+---
+
+## Expected Outcomes
+
+### If FFT normalization is wrong:
+
+**You'll see:**
+- FFT test shows large error
+- Φ_max scales with L
+- Energy scales super-extensively (E ~ L³ or worse)
+
+**Fix:**
+- Add normalization factor to Poisson solver
+- Divide by (2π/L)² or similar
+- Re-run validation
+
+### If it's real physics:
+
+**You'll see:**
+- FFT test passes
+- Energy per wall is constant
+- E ~ L (interface scaling)
+- E/site ~ 1/L (decreasing, not increasing!)
+
+**Interpretation:**
+- Interface energy dominates
+- Increasing E/site is because interface/bulk ratio grows
+- This is actually NORMAL for finite systems
+- But then your validation data doesn't match...
+
+### If it's an implementation bug:
+
+**You'll see:**
+- FFT test passes
+- Energy scaling doesn't match any simple model
+- Some quantity has obvious wrong units
+
+**Fix:**
+- Debug the energy calculation
+- Check all factors of dx, L, normalization
+
+---
+
+## What To Do After Running
+
+### Scenario A: FFT Problem Found
+
+```python
+# In your defrag solver, current code probably:
+Phi_fft = -s_fft / K2
+
+# Should be:
+Phi_fft = -s_fft / K2 / (2*np.pi/L)**2  # or similar
+
+# The extra factor ensures proper units
+```
+
+**Then:** Re-run all validation with fixed code
+
+### Scenario B: It's Physics (Interface Energy)
+
+**Reframe your results:**
+- E_bind is interface energy (E ~ L)
+- E/site increases because interface fraction increases
+- For L→∞, E/site → 0 (bulk phase has no defrag energy)
+- Your stripe phase is interface-dominated for L < 100
+
+**This is fine!** Just need to explain it correctly.
+
+### Scenario C: Unknown Issue
+
+**Next steps:**
+- Check energy calculation line by line
+- Compare to analytical cases
+- Simplify to 1D to debug
+- Ask for help debugging
+
+---
+
+## Why This Doesn't Invalidate Your Main Results
+
+**Your key findings are still solid:**
+
+1. ✅ **Reproducibility:** Perfect (0% variation)
+2. ✅ **Spatial structure:** Dramatic difference (16× correlation, 10× anisotropy)
+3. ✅ **Wall scaling:** Perfect for L≥48 (walls = 2L)
+
+**The energy scaling anomaly:**
+- Doesn't affect wall counting
+- Doesn't affect spatial structure
+- Doesn't affect reproducibility
+- Just affects absolute energy values
+
+**Bottom line:**
+- Stripe phase is REAL
+- Energy scaling needs explanation
+- Either it's a bug (fix it) or physics (explain it)
+- Either way, doesn't change core conclusions
+
+---
+
+## Quick Summary
+
+**Run:** `python investigate_energy_scaling.py`
+
+**Wait:** 30 minutes
+
+**Check:** Terminal output for diagnosis
+
+**Result:** Will tell you if it's FFT, physics, or bug
+
+**Then:** Fix, explain, or ask for help accordingly
+
+---
+
+**Let's figure out what's causing the weird energy scaling!** 🔍
