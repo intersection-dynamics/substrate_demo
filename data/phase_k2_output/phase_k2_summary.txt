@@ -1,0 +1,7 @@
+k_index = (2, 0)
+epsilon = 0.05
+dt = 0.005
+sample_interval = 10
+dt_sample = 0.05
+f_peak ~ 2.344140
+omega_peak ~ 14.728664

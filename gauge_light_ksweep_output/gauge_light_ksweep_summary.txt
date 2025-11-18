@@ -1,0 +1,18 @@
+gauge_light_ksweep summary
+--------------------------
+L = 128
+dx = 1.000000
+dt = 0.050000
+c = 1.000000
+n_steps = 4000
+sample_interval = 1
+amp_mode = 5.000000e-03
+
+mode nx=1 ny=0  k_mod=0.04908739  f_peak=0.00999750  omega_peak=0.06281615
+mode nx=2 ny=0  k_mod=0.09817477  f_peak=0.01499625  omega_peak=0.09422422
+mode nx=3 ny=0  k_mod=0.14726216  f_peak=0.02499375  omega_peak=0.15704037
+mode nx=1 ny=1  k_mod=0.06942005  f_peak=0.00999750  omega_peak=0.06281615
+mode nx=2 ny=1  k_mod=0.10976273  f_peak=0.01999500  omega_peak=0.12563230
+
+Approx linear slope omega/k = 1.05947453
+This is the effective speed of light in lattice units.

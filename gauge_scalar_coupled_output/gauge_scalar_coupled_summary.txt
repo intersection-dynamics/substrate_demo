@@ -1,0 +1,21 @@
+gauge_scalar_coupled_probe summary
+---------------------------------
+L = 128
+dx = 1.000000
+dt = 0.020000
+c = 1.000000
+kappa = 1.000000
+m2 = 0.000000
+lam = 0.100000
+g_coup = 0.500000
+n_steps = 4000
+analysis_interval = 20
+
+Initial E_matter = 1.00509042e+01
+Initial E_gauge  = 0.00000000e+00
+Initial E_total  = 1.00509042e+01
+Final   E_matter = nan
+Final   E_gauge  = nan
+Final   E_total  = nan
+
+Total energy drift (final - initial) = nan
