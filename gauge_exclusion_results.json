@@ -1,0 +1,13 @@
+{
+  "one_skyrmion": {
+    "E": 1.3552039688042334
+  },
+  "two_overlapping": {
+    "E": 2.527561882980142
+  },
+  "two_separated": {
+    "E": 0.636828920680384
+  },
+  "verdict": "MODERATE_EXCLUSION",
+  "energy_cost": 1.890732962299758
+}

@@ -1,0 +1,15 @@
+=== Monogamy Test Results ===
+
+Lattice: 3x3
+Local dimension: 2
+Winding number: 1
+Pattern sites: 4
+Env1 sites: 4
+Env2 sites: 1
+
+I(P:E1): -5.600081984067959e-14
+I(P:E2): 6.661338147750941e-16
+S(P): -0.0
+monogamy_sum: -5.53346860259045e-14
+monogamy_bound: -0.0
+monogamous: False

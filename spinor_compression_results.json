@@ -1,0 +1,26 @@
+{
+  "w0_s0": {
+    "w_spatial": 0,
+    "w_spin": 0,
+    "entropy": 0.6121271006872872,
+    "description": "w=0, no spin texture (bosonic?)"
+  },
+  "w1_s0": {
+    "w_spatial": 1,
+    "w_spin": 0,
+    "entropy": 0.34675062921777666,
+    "description": "w=1, no spin texture (spatial only)"
+  },
+  "w1_s1": {
+    "w_spatial": 1,
+    "w_spin": 1,
+    "entropy": 1.1772291317551045,
+    "description": "w=1, matching spin texture (skyrmion)"
+  },
+  "w1_s-1": {
+    "w_spatial": 1,
+    "w_spin": -1,
+    "entropy": 0.9943810750654166,
+    "description": "w=1, opposite spin texture (anti-skyrmion)"
+  }
+}

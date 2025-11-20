@@ -1,0 +1,71 @@
+{
+  "0": {
+    "winding": 0,
+    "separation": 1.0,
+    "S_single": 1.211356348363912,
+    "S_two": 1.3260576435341251,
+    "S_expected": 2.422712696727824,
+    "compression_ratio": 0.5473441590185792,
+    "result_type": "bosonic",
+    "single_pattern_sites": [
+      4,
+      5,
+      7,
+      8
+    ],
+    "two_pattern_sites": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ]
+  },
+  "1": {
+    "winding": 1,
+    "separation": 1.0,
+    "S_single": 2.0310715119730967,
+    "S_two": 1.8623952134896526,
+    "S_expected": 4.062143023946193,
+    "compression_ratio": 0.45847603161949174,
+    "result_type": "bosonic",
+    "single_pattern_sites": [
+      4,
+      5,
+      7,
+      8
+    ],
+    "two_pattern_sites": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ]
+  },
+  "-1": {
+    "winding": -1,
+    "separation": 1.0,
+    "S_single": 2.031071511973084,
+    "S_two": 1.8490576818184339,
+    "S_expected": 4.062143023946168,
+    "compression_ratio": 0.455192658387042,
+    "result_type": "bosonic",
+    "single_pattern_sites": [
+      4,
+      5,
+      7,
+      8
+    ],
+    "two_pattern_sites": [
+      1,
+      2,
+      4,
+      5,
+      7,
+      8
+    ]
+  }
+}
