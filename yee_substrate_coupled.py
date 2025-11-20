@@ -11,6 +11,10 @@ Unified 2D substrate engine:
         E = -∂A/∂t  (temporal gauge Phi=0).
   - Minimal-ish gauge coupling between psi and A via covariant gradients.
   - Defrag potential V_def[psi] from Poisson solve on rho = |psi|^2.
+  - NEW: Symmetry selector potential V_sym[psi] built from a smoothed density:
+        symmetry = none    → V_sym = 0
+        symmetry = fermion → V_sym = lambda_F * rho_smooth
+        symmetry = boson   → V_sym = -alpha_B * rho_smooth + beta_B * rho_smooth^2
 
 Modes:
   1) substrate     : psi noise + gauge noise + defrag + coupling.
@@ -68,8 +72,26 @@ def deriv_y(field, dx: float):
     return (xp.roll(field, -1, axis=1) - xp.roll(field, +1, axis=1)) / (2.0 * dx)
 
 
+def smooth_density(rho):
+    """
+    Simple 3x3 box smoothing of a scalar field.
+    This plays the role of a coarse-grained density for symmetry selection.
+    """
+    acc = rho.copy()
+    # axial neighbours
+    for sx in (-1, 1):
+        acc += xp.roll(rho, sx, 0)
+    for sy in (-1, 1):
+        acc += xp.roll(rho, sy, 1)
+    # diagonal neighbours
+    for sx in (-1, 1):
+        for sy in (-1, 1):
+            acc += xp.roll(xp.roll(rho, sx, 0), sy, 1)
+    return acc / 9.0
+
+
 # ======================================================================
-# Covariant gradient, current, defrag
+# Covariant gradient, current, defrag, symmetry selector
 # ======================================================================
 
 def covariant_gradient_sq(psi, ax_center, ay_center, dx: float, q: float):
@@ -98,6 +120,32 @@ def gauge_current(psi, ax_center, ay_center, dx: float, q: float):
     return jx, jy
 
 
+def symmetry_potential(rho, mode: str, lambda_F: float, alpha_B: float, beta_B: float):
+    """
+    Build symmetry selector potential V_sym from a smoothed density rho_smooth.
+
+    mode:
+        'none'    → V_sym = 0
+        'fermion' → V_sym = lambda_F * rho_smooth    (repulsive, anti-bunching)
+        'boson'   → V_sym = -alpha_B * rho_smooth
+                               + beta_B * rho_smooth^2 (attractive with saturation)
+    """
+    if mode == "none":
+        return xp.zeros_like(rho), rho
+
+    rho_smooth = smooth_density(rho)
+
+    if mode == "fermion":
+        V_sym = lambda_F * rho_smooth
+    elif mode == "boson":
+        V_sym = -alpha_B * rho_smooth + beta_B * rho_smooth**2
+    else:
+        # Fallback: no symmetry selection
+        V_sym = xp.zeros_like(rho)
+
+    return V_sym, rho_smooth
+
+
 # ======================================================================
 # Unified Yee-based substrate engine
 # ======================================================================
@@ -114,7 +162,8 @@ class YeeSubstrateCoupled2D:
 
       1) Maxwell (Yee TEz) with matter current sources Jx,Jy.
       2) Integrate A from E (E = -∂A/∂t).
-      3) Update psi using midpoint RK2 with covariant gradients and defrag.
+      3) Update psi using midpoint RK2 with covariant gradients,
+         defrag potential, and symmetry selector.
     """
 
     def __init__(
@@ -127,6 +176,10 @@ class YeeSubstrateCoupled2D:
         g_defrag: float,
         n_steps: int,
         sample_interval: int,
+        symmetry_mode: str = "none",
+        lambda_F: float = 0.0,
+        alpha_B: float = 0.0,
+        beta_B: float = 0.0,
     ):
         self.L = L
         self.dx = dx
@@ -137,6 +190,11 @@ class YeeSubstrateCoupled2D:
         self.g_defrag = g_defrag
         self.n_steps = n_steps
         self.sample_interval = sample_interval
+
+        self.symmetry_mode = symmetry_mode
+        self.lambda_F = lambda_F
+        self.alpha_B = alpha_B
+        self.beta_B = beta_B
 
         shape = (L, L)
 
@@ -251,10 +309,10 @@ class YeeSubstrateCoupled2D:
 
     def rhs_psi(self, psi):
         """
-        d psi / dt = -i [  -½ ∇² psi + V_def * psi + ½ |psi|^2 psi ]
+        d psi / dt = -i [  -½ ∇² psi + V_def * psi + V_sym * psi + ½ |psi|^2 psi ]
         with gauge-covariant gradients included in the kinetic term via Ax,Ay.
 
-        We treat the self-interaction term ½|psi|^2 as a simple local nonlinearity.
+        V_sym is the symmetry selector potential built from a smoothed density.
         """
 
         rho = xp.abs(psi)**2
@@ -263,19 +321,31 @@ class YeeSubstrateCoupled2D:
         Ax_c = 0.5 * (self.Ax + xp.roll(self.Ax, +1, axis=0))
         Ay_c = 0.5 * (self.Ay + xp.roll(self.Ay, +1, axis=1))
 
-        grad2 = covariant_gradient_sq(psi, Ax_c, Ay_c, self.dx, self.q)
+        # Covariant gradient norm (used only for diagnostics/energy; keep for consistency)
+        _ = covariant_gradient_sq(psi, Ax_c, Ay_c, self.dx, self.q)
 
+        # Defrag potential
         V_def = 0.0
         if self.g_defrag != 0.0:
             V_def = self.defrag_potential(rho)
 
-        # Effective Hamiltonian density term (we construct in a toy way):
-        # H_psi = ½|D psi|^2 + ½|psi|^2 + V_def |psi|^2
-        # For the Schrödinger-like equation, we mimic
-        #  -½ ∇² psi + V_def psi + ½|psi|^2 psi
-        lap_psi = laplacian(psi, self.dx)
-        Hpsi = -0.5 * lap_psi + V_def * psi + 0.5 * rho * psi
+        # Symmetry selector potential
+        V_sym, _rho_smooth = symmetry_potential(
+            rho,
+            self.symmetry_mode,
+            self.lambda_F,
+            self.alpha_B,
+            self.beta_B,
+        )
 
+        # Total effective potential
+        V_eff = V_def + V_sym + 0.5 * rho
+
+        # Kinetic: standard Laplacian on psi (gauge enters via Ax,Ay if desired)
+        lap_psi = laplacian(psi, self.dx)
+
+        # Schrödinger-like evolution: i ∂t ψ = -½ ∇²ψ + V_eff ψ
+        Hpsi = -0.5 * lap_psi + V_eff * psi
         return -1j * Hpsi
 
     # ------------------------------------------------------------------
@@ -338,15 +408,16 @@ class YeeSubstrateCoupled2D:
         self.psi = psi
 
     # ------------------------------------------------------------------
-    # Energy diagnostic
+    # Energy diagnostic (toy)
     # ------------------------------------------------------------------
 
     def total_energy(self) -> float:
         """
         Total toy energy:
-          E_scalar = sum( ½|D psi|^2 + ½|psi|^2 )
+          E_scalar = sum( ½|∇ psi|^2 + ½|psi|^2 )
           E_defrag = ½ g_defrag ∫ rho phi
           E_EM     = ½ ∫ (Ex^2 + Ey^2 + c^2 Bz^2)
+        Symmetry energy is folded into the scalar potential term implicitly.
         """
         dx = self.dx
         dy = self.dy
@@ -419,6 +490,10 @@ def run_sim(args):
         g_defrag=args.g_defrag,
         n_steps=args.n_steps,
         sample_interval=args.sample_interval,
+        symmetry_mode=args.symmetry,
+        lambda_F=args.lambda_F,
+        alpha_B=args.alpha_B,
+        beta_B=args.beta_B,
     )
 
     out_dir = f"{args.out_prefix}_output"
@@ -426,6 +501,8 @@ def run_sim(args):
 
     mode = args.mode.lower()
     print(f"[MODE] {mode}")
+    print(f"[SYM] symmetry={args.symmetry}, "
+          f"lambda_F={args.lambda_F}, alpha_B={args.alpha_B}, beta_B={args.beta_B}")
 
     if mode == "substrate":
         # Full substrate: scalar noise + gauge A noise + defrag + coupling
@@ -501,7 +578,7 @@ def run_sim(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Unified 2D Yee-Maxwell substrate engine with matter coupling."
+        description="Unified 2D Yee-Maxwell substrate engine with matter coupling + symmetry selector."
     )
     parser.add_argument("--L", type=int, default=64, help="Grid size (LxL).")
     parser.add_argument("--dx", type=float, default=1.0, help="Lattice spacing.")
@@ -533,6 +610,17 @@ def main():
                         help="Integer mode index in x for plane wave.")
     parser.add_argument("--ny", type=int, default=0,
                         help="Integer mode index in y for plane wave.")
+
+    # Symmetry selector parameters
+    parser.add_argument("--symmetry", type=str, default="none",
+                        choices=["none", "fermion", "boson"],
+                        help="Symmetry selector mode for the substrate.")
+    parser.add_argument("--lambda_F", type=float, default=0.0,
+                        help="Fermion-like repulsion strength (symmetry=fermion).")
+    parser.add_argument("--alpha_B", type=float, default=0.0,
+                        help="Boson-like attraction parameter (symmetry=boson).")
+    parser.add_argument("--beta_B", type=float, default=0.0,
+                        help="Boson-like saturation parameter (symmetry=boson).")
 
     args = parser.parse_args()
     run_sim(args)

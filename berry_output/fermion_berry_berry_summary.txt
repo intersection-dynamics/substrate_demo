@@ -1,0 +1,9 @@
+Berry-on-rays analysis
+======================
+
+Number of snapshots: 51
+First step: 0, last step: 4000
+First time: 0.000000, last time: 20.000000
+
+Total Berry-like phase (raw):     40.891619 rad
+Total Berry-like phase (wrapped): -3.090678 rad
