@@ -1,43 +1,99 @@
-# Substrate Framework — Classical Reality from Pure Hilbert Space
+# Substrate Framework — Exploring Emergent Structure from Quantum Substrates
 
-**November 20, 2025 — Emergent fermionic exclusion achieved**
+**Computational toy models investigating how classical-like behavior can arise from finite Hilbert spaces with local Hamiltonians and constraint operators.**
 
-In the gauged spinor model on a 2×2 → 4×4 Yee lattice with Z₂ gauge fields and Gauss-law enforcement (λ_G ≥ 5),  
-topologically charged (w = ±1) pointer states exhibit:
+## Philosophy
 
-- short-range repulsion ΔE ≈ +37 (overlap strongly suppressed)  
-- long-range attraction ΔE ≈ –35 (separated pair bound)
+This research explores a minimal set of assumptions:
 
-This behaviour is absent for λ_G = 0. Low-winding states remain compressible.
+1. **Hilbert Space Realism**: Physical states are vectors in a Hilbert space
+2. **Unitary Evolution**: Dynamics arise from local Hermitian Hamiltonians  
+3. **Emergent Structure**: Classical-like patterns emerge as stable configurations
 
-These results provide the first numerical evidence that fermionic statistics can emerge from local gauge redundancy protecting unique entanglement structure — without imposing antisymmetrisation by hand.
+The goal is to investigate how far these assumptions can take us in understanding structured behavior in finite quantum systems.
+
+**Critical caveat**: These are toy models on small lattices (2×2 to 8×8). No claims are made about real particle physics, the Standard Model, or quantum gravity. All statements about "emergence" refer solely to patterns observed within these finite models.
+
+## Recent Results
+
+### Constraint-Driven Exclusion (November 2025)
+
+In a 2D lattice model with Z₂ gauge fields and Gauss-law constraints:
+
+- **Observation**: Overlapping skyrmion-like patterns exhibit higher constraint violations and energies than spatially separated patterns
+- **Scaling**: The energy penalty ΔE grows ~13× from L=2 to L=6, suggesting the mechanism is not purely a finite-size artifact
+- **Mechanism**: The effect is dominated by Gauss-law violation penalties (ΔE ≈ λ_G × ΔV)
+
+**What this shows**: Local gauge-like constraints can produce pattern-dependent energy penalties that favor spatial separation over overlap.
+
+**What this does NOT show**: True fermionic exchange statistics, Pauli exclusion principle, or antisymmetric wave functions under particle exchange.
+
+See `docs/skyrmion_overlap_scaling.md` for detailed analysis.
+
+### Other Explorations
+
+- **Maxwell Emergence**: Demonstration that gauge field dynamics consistent with Maxwell's equations can arise from substrate constraints ("Mr. Magnetic")
+- **Bell Correlations**: CHSH violation in substrate models without non-local connections
+- **Structure Formation**: Hierarchical clustering in "defrag gravity" simulations
+
+Each of these is documented as what was observed in specific toy models, without extrapolation to real physics.
+
+## Code Structure
+
+### Main Simulations
+
+- `src/skyrmion_scaling.py` → Product-state scaling experiments (L=2 to L=8)
+- `src/gauge_exclusion_with_gauss.py` → Gauss-constraint exclusion tests
+- `src/mr_magnetic_demo.py` → Maxwell equation emergence
+- `src/bell_violation_substrate.py` → CHSH correlation tests
+
+All scripts run in seconds to minutes on standard laptops.
+
+### Data
+
+- `data/scaling_lambda5.csv` → Raw scaling data for λ_G = 5.0
+- Additional datasets documented in respective directories
+
+## Methodology
+
+**Product-state expectations**: Most results use expectation values computed on fixed product states, not full many-body eigenstate calculations. This allows scaling to larger lattices but limits interpretation.
+
+**Finite systems**: Exact quantum simulation hits exponential walls. Current results are from L×L lattices with L ≤ 8. Claims about "emergence" must be interpreted within these scale limitations.
+
+**Reproducibility**: All parameters, initial conditions, and measurement procedures are documented. Scripts include command-line arguments for parameter sweeps.
+
+## Current Limitations
+
+1. **Scale**: Cannot demonstrate thermodynamic limit or continuum behavior
+2. **Exact simulation**: Limited to ~10⁶ dimensional Hilbert spaces
+3. **Product states**: Not exploring full many-body entanglement
+4. **Toy models**: Hamiltonians are chosen for tractability, not physical realism
 
 ## Documents
 
-- Latest framework paper (November 20, 2025): [Substrate_Framework_Nov20_2025.pdf](/docs/Substrate_Framework_Nov20_2025.pdf)
-- Previous version (November 19): [Substrate_Framework_Nov19_2025.pdf](/docs/Substrate_Framework_Nov19_2025.pdf)
+- Framework overview: `docs/Substrate_Physics.pdf` (November 21, 2025)
+- Scaling analysis: `docs/skyrmion_overlap_scaling.md`
+- Earlier versions available in `docs/archive/`
 
-## Key Scripts (all runnable in seconds on a laptop)
+## Principle
 
-- `src/gauge_exclusion_with_gauss.py` → the November 20 breakthrough script  
- `src/yee_substrate_coupled.py` → full coupled model (work in progress)  
- `src/test_skyrmion_exclusion.py` → original soft-repulsion tests  
- `src/mr_magnetic_demo.py` → Maxwell emergence ("Mr. Magnetic")
+**If the data do not show it, we do not say it.**
 
-## Current Status
+All results are presented with explicit acknowledgment of what is observed versus what is speculated. Interpretive hypotheses are clearly labeled as such.
 
-All results are obtained in small (10–100k dim) toy models, yet the phenomena (gravity, gauge fields, light propagation, fermionic exclusion) appear robustly.
+## License
 
-The only assumptions are:
-1. Hilbert space is primary
-2. Strictly unitary evolution  
-3. Classicality is emergent (pointer states selected by dynamics)
+- Code: MIT License
+- Documentation: CC-BY-4.0
 
-Everything else — particles, forces, statistics, spacetime — is being compiled, not postulated.
+## Contact
 
-Code: MIT license  
-Document: CC-BY-4.0
+Benjamin Bray  
+Independent Researcher  
+Wildwood, Florida
 
-Questions / criticism / collaboration → benjamin.bray@intersection.dynamics
+Questions, criticisms, and feedback welcome.
 
-— Benjamin Bray
+---
+
+*This is exploratory computational physics on finite systems. Results are shared for transparency and potential collaborative development, not as claims about fundamental physics.*
