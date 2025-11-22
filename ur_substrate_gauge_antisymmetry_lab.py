@@ -1,75 +1,63 @@
 #!/usr/bin/env python3
 """
-substrate_engine.py
+ur_substrate_gauge_antisymmetry_lab.py
 
-Unified substrate lab / engine.
+Unified substrate lab combining:
 
-Includes:
-
-1) DIRAC+EM GAUGE SYMMETRY LAB
-   ----------------------------
+1) DIRAC+EM GAUGE SYMMETRY CHECK
+   --------------------------------
    - Uses yee_dirac_substrate.py (2+1D Dirac–Maxwell on a Yee grid).
-   - Evolves Psi and EM fields with minimal coupling.
-   - Applies a local U(1) gauge transformation:
-         Psi' = exp(i q chi) Psi
-         Ax'  = Ax + ∂_x chi
-         Ay'  = Ay + ∂_y chi
-   - Compares covariant Dirac energy E_D before/after.
+   - Evolves Psi and EM fields for a short time with minimal coupling.
+   - Constructs a local U(1) gauge phase χ(x,y) and applies:
+         Psi' = exp(i q χ) Psi
+         Ax'  = Ax + ∂_x χ
+         Ay'  = Ay + ∂_y χ
+   - Computes the covariant Dirac energy <Psi|H_D[A]|Psi> before/after.
+   - If ΔE / E is small, this numerically supports correct U(1) gauge
+     implementation in the discretized Dirac–Maxwell engine.
 
 2) FINITE-HILBERT TWO-EXCITATION ANTISYMMETRY MODEL
-   -------------------------------------------------
-   - 2D periodic lattice with Ns = Lx * Ly sites, two spin-1/2 excitations.
-   - Basis |r1, s1; r2, s2>, dim = Ns*2 * Ns*2.
+   --------------------------------
+   - 2D periodic lattice with Ns = Lx * Ly sites, two distinguishable
+     excitations with spin-1/2.
+   - Hilbert basis: |r1, s1; r2, s2>, dim = Ns*2 * Ns*2.
    - Hamiltonian:
        H = H_hop + H_mass + H_defrag + H_Gauss + H_contact
-     with:
-       * hopping (J_hop),
-       * mass m per excitation,
-       * defrag potential (Gaussian center bias),
-       * Gauss-like occupancy penalty,
-       * local contact spin interaction at overlap.
+     where:
+       * H_hop    : tight-binding hopping on the lattice (J_hop).
+       * H_mass   : mass term per excitation (m).
+       * H_defrag : Gaussian defrag potential favoring clumping toward
+                    lattice center (g_defrag).
+       * H_Gauss  : local occupancy penalty enforcing "information balance":
+                    λ_G/2 * sum_r (ρ(r) - 2/Ns)^2.
+       * H_contact: spin contact term at r1 == r2 with Heisenberg-like
+                    exchange + singlet bonus λ_S and triplet penalty λ_T.
 
-   - Computes ground state, exchange antisymmetry, overlap probability,
-     singlet/triplet composition at overlap, and Gauss-like energy.
+   - Computes the ground state via sparse eigensolver.
+   - Diagnoses:
+       * exchange antisymmetry score A under P_ex,
+       * spatial overlap probability (r1 == r2),
+       * singlet vs triplet composition at overlap,
+       * Gauss-like energy expectation.
 
-3) CHSH DIMER / BELL-TEST CORE
-   ---------------------------
-   - Two-qubit Heisenberg dimer with tunable J, hz.
-   - Initial Bell or product states.
-   - Time evolution via QuTiP mesolve.
-   - Computes CHSH S(t) and max S(t) over the time grid.
+Command-line flags let you run either or both:
 
-The module can be imported as a library OR run as a script:
-
-    python substrate_engine.py
+    --run-dirac / --no-run-dirac
+    --run-finite / --no-run-finite
 """
 
 import argparse
 import os
 import time
 from dataclasses import dataclass, asdict
-from typing import Dict, Any
 
 import numpy as np
 
-# SciPy for finite-Hilbert diagonalization
+# SciPy for finite-Hilbert Hamiltonian diagonalization
 from scipy.sparse import lil_matrix, csr_matrix
 from scipy.sparse.linalg import eigsh
 
-# QuTiP for CHSH dimer tests
-from qutip import (
-    basis,
-    tensor,
-    qeye,
-    sigmax,
-    sigmay,
-    sigmaz,
-    mesolve,
-    expect,
-)
-
-
-# Import Dirac+EM substrate
+# Import the Dirac+EM substrate
 import yee_dirac_substrate as yds
 
 
@@ -77,29 +65,10 @@ import yee_dirac_substrate as yds
 # SECTION 1: DIRAC+EM GAUGE SYMMETRY LAB
 # =============================================================================
 
-@dataclass
-class DiracGaugeParams:
-    Nx: int = 32
-    Ny: int = 32
-    dx: float = 1.0
-    dt: float = 0.01
-    steps: int = 200
-    c: float = 1.0
-    q: float = 1.0
-    m: float = 0.1
-    defrag: bool = False
-    defrag_kappa: float = 0.1
-    defrag_lambda: float = 1.0
-    defrag_g: float = 0.5
-    chi_amp: float = 0.5
-    chi_mode_x: int = 1
-    chi_mode_y: int = 1
-    out_dir: str = "gauge_lab_output"
-
-
 def build_chi_field(Ny, Nx, dx, amp, mode_x, mode_y, xp):
     """
-    χ(x,y) = amp * sin(2π n_x x/Lx) * sin(2π n_y y/Ly)
+    Build a smooth gauge phase field χ(x,y) = amp * sin(2π n_x x/Lx) * sin(2π n_y y/Ly).
+    Returns χ as an array of shape (Ny, Nx) in the xp backend (numpy or cupy).
     """
     Lx = Nx * dx
     Ly = Ny * dx
@@ -118,8 +87,10 @@ def build_chi_field(Ny, Nx, dx, amp, mode_x, mode_y, xp):
 def dirac_energy_covariant(Psi, dx, c, m, alpha1, alpha2, beta,
                            Ax, Ay, q, phi, g_phi, xp):
     """
-    E_D = Re ∫ Ψ† H_D[A] Ψ d^2x
-    where H_D is implemented by yee_dirac_substrate.dirac_hamiltonian_action.
+    Compute the covariant Dirac energy:
+        E_D = Re ∫ Ψ† H_D Ψ d^2x
+    where H_D responds to Ax, Ay, and (optionally) phi via
+    dirac_hamiltonian_action in yee_dirac_substrate.py.
     """
     Ny, Nx = Psi.shape[1], Psi.shape[2]
     dA = dx * dx
@@ -133,39 +104,36 @@ def dirac_energy_covariant(Psi, dx, c, m, alpha1, alpha2, beta,
     Psi_flat = Psi.reshape(2, Ny * Nx)
     H_Psi_flat = H_Psi.reshape(2, Ny * Nx)
 
-    Psi_dag_flat = xp.conjugate(Psi_flat).T
+    Psi_dag_flat = xp.conjugate(Psi_flat).T  # (Ny*Nx, 2)
     density_flat = xp.sum(Psi_dag_flat * H_Psi_flat.T, axis=1)
     E_complex = xp.sum(density_flat) * dA
 
     return float(E_complex.real)
 
 
-def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
-    """
-    Run the Dirac+EM gauge symmetry lab and return diagnostics in a dict.
-    """
+def run_dirac_gauge_symmetry_lab(args):
     xp = yds.xp
     XP_BACKEND = yds.XP_BACKEND
 
-    Nx = params.Nx
-    Ny = params.Ny
-    dx = params.dx
-    dt = params.dt
-    steps = params.steps
-    c = params.c
-    q = params.q
-    m = params.m
+    Nx = args.Nx
+    Ny = args.Ny
+    dx = args.dx
+    dt = args.dt
+    steps = args.steps
+    c = args.c
+    q = args.q
+    m = args.m
 
-    defrag = params.defrag
-    defrag_kappa = params.defrag_kappa
-    defrag_lambda = params.defrag_lambda
-    defrag_g = params.defrag_g if defrag else 0.0
+    defrag = args.defrag
+    defrag_kappa = args.defrag_kappa
+    defrag_lambda = args.defrag_lambda
+    defrag_g = args.defrag_g if defrag else 0.0
 
-    out_dir = params.out_dir
+    out_dir = args.out_dir
     os.makedirs(out_dir, exist_ok=True)
 
     print("======================================================================")
-    print("DIRAC GAUGE SYMMETRY LAB (substrate_engine)")
+    print("DIRAC GAUGE SYMMETRY LAB")
     print("======================================================================")
     print(f"[INIT] Backend      : {XP_BACKEND}")
     print(f"[INIT] Grid         : Nx={Nx}, Ny={Ny}, dx={dx}, dt={dt}")
@@ -175,25 +143,28 @@ def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
         print(f"[INIT] Defrag ON    : kappa={defrag_kappa}, lambda={defrag_lambda}, g_phi={defrag_g}")
     else:
         print("[INIT] Defrag OFF")
-    print(f"[INIT] Gauge phase  : chi_amp={params.chi_amp}, modes=({params.chi_mode_x},{params.chi_mode_y})")
+    print(f"[INIT] Gauge phase  : chi_amp={args.chi_amp}, modes=({args.chi_mode_x},{args.chi_mode_y})")
     print("======================================================================")
 
-    # Dirac matrices
+    # Build Dirac matrices
     sigma_x, sigma_y, sigma_z, gamma0, gamma1, gamma2, alpha1, alpha2, beta = \
         yds.build_dirac_matrices(xp)
 
-    # Initialize spinor & EM fields
+    # Initialize Dirac spinor and EM fields
     Psi_n = yds.init_spinor(Ny, Nx, dx, xp, m)
     Ex, Ey, Bz = yds.init_em_fields(Ny, Nx, xp)
+
+    # Vector potential A for temporal gauge dA/dt = -E
     Ax = xp.zeros_like(Ex)
     Ay = xp.zeros_like(Ey)
 
+    # Defrag scalar field (optional)
     if defrag:
         phi = xp.zeros((Ny, Nx), dtype=xp.float64)
     else:
         phi = None
 
-    # Euler step to get Psi^(1)
+    # Euler step to get Psi^(1) for leapfrog
     H_Psi = yds.dirac_hamiltonian_action(
         Psi_n, dx, c, m, alpha1, alpha2, beta, xp,
         Ax=Ax, Ay=Ay, q=q,
@@ -207,7 +178,7 @@ def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
     Psi_nm1 = Psi_n
     Psi_n = Psi_np1
 
-    # Time evolution
+    # Time loop: warm up system
     eps0 = 1.0
     print("[INFO] Warming up system with coupled Dirac+EM evolution...")
     t0 = time.time()
@@ -251,14 +222,13 @@ def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
     )
     norm_before = float(np.sqrt(float(yds.xp.sum(yds.xp.abs(Psi_n) ** 2))))
 
-    # Build χ
-    chi = build_chi_field(
-        Ny, Nx, dx,
-        amp=params.chi_amp,
-        mode_x=params.chi_mode_x,
-        mode_y=params.chi_mode_y,
-        xp=xp
-    )
+    # Build χ(x,y)
+    chi = build_chi_field(Ny, Nx, dx,
+                          amp=args.chi_amp,
+                          mode_x=args.chi_mode_x,
+                          mode_y=args.chi_mode_y,
+                          xp=xp)
+
     dchi_dx = yds.central_diff_x(chi, dx)
     dchi_dy = yds.central_diff_y(chi, dx)
 
@@ -289,15 +259,14 @@ def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
     print(f"Norm ||Psi|| before = {norm_before:.10e}")
     print(f"Norm ||Psi'|| after = {norm_after:.10e}")
     print("======================================================================")
-
-    return {
-        "E_D_before": E_D_before,
-        "E_D_after": E_D_after,
-        "delta_E": dE,
-        "rel_error": rel_err,
-        "norm_before": norm_before,
-        "norm_after": norm_after,
-    }
+    print("Interpretation:")
+    print("  - In the continuum, exact gauge invariance means E_D' = E_D exactly.")
+    print("  - On a discrete grid, small ΔE is expected from finite-difference and")
+    print("    leapfrog approximations.")
+    print("  - If ΔE is numerically very small (e.g. ≪ 1), this supports that")
+    print("    the Dirac+EM minimal coupling is correctly implementing local")
+    print("    U(1) gauge symmetry on this lattice.")
+    print("======================================================================")
 
 
 # =============================================================================
@@ -305,7 +274,7 @@ def run_dirac_gauge_experiment(params: DiracGaugeParams) -> Dict[str, Any]:
 # =============================================================================
 
 @dataclass
-class FiniteSubstrateParams:
+class SubstrateParams:
     Lx: int = 2
     Ly: int = 2
     J_hop: float = 1.0
@@ -335,25 +304,25 @@ def build_neighbors(Lx: int, Ly: int):
     for y in range(Ly):
         for x in range(Lx):
             r = site_index(x, y, Lx, Ly)
-            xp_ = (x + 1) % Lx
-            xm_ = (x - 1) % Lx
-            yp_ = (y + 1) % Ly
-            ym_ = (y - 1) % Ly
-            neighbors[r].append(site_index(xp_, y, Lx, Ly))
-            neighbors[r].append(site_index(xm_, y, Lx, Ly))
-            neighbors[r].append(site_index(x, yp_, Lx, Ly))
-            neighbors[r].append(site_index(x, ym_, Lx, Ly))
+            xp = (x + 1) % Lx
+            xm = (x - 1) % Lx
+            yp = (y + 1) % Ly
+            ym = (y - 1) % Ly
+            neighbors[r].append(site_index(xp, y, Lx, Ly))
+            neighbors[r].append(site_index(xm, y, Lx, Ly))
+            neighbors[r].append(site_index(x, yp, Lx, Ly))
+            neighbors[r].append(site_index(x, ym, Lx, Ly))
     return neighbors
 
 
-def defrag_potential(r: int, params: FiniteSubstrateParams) -> float:
+def defrag_potential(r: int, params: SubstrateParams) -> float:
     Lx, Ly = params.Lx, params.Ly
     x, y = site_coords(r, Lx, Ly)
     cx = 0.5 * (Lx - 1)
     cy = 0.5 * (Ly - 1)
-    dx_ = x - cx
-    dy_ = y - cy
-    dist2 = dx_ * dx_ + dy_ * dy_
+    dx = x - cx
+    dy = y - cy
+    dist2 = dx * dx + dy * dy
     if params.sigma_defrag <= 0.0:
         return 0.0
     return -np.exp(-dist2 / (2.0 * params.sigma_defrag ** 2))
@@ -373,10 +342,11 @@ def decode_basis(idx: int, Ns: int):
     s1 = r1s1 % 2
     r2 = r2s2 // 2
     s2 = r2s2 % 2
+
     return r1, s1, r2, s2
 
 
-def build_finite_substrate_hamiltonian(params: FiniteSubstrateParams) -> csr_matrix:
+def build_substrate_hamiltonian(params: SubstrateParams) -> csr_matrix:
     Lx, Ly = params.Lx, params.Ly
     Ns = Lx * Ly
     dim = Ns * 2 * Ns * 2
@@ -390,10 +360,10 @@ def build_finite_substrate_hamiltonian(params: FiniteSubstrateParams) -> csr_mat
     for idx in range(dim):
         r1, s1, r2, s2 = decode_basis(idx, Ns)
 
-        # mass
+        # Mass
         H[idx, idx] += 2.0 * params.m
 
-        # defrag
+        # Defrag
         H[idx, idx] += params.g_defrag * (V_defrag_site[r1] + V_defrag_site[r2])
 
         # Gauss-like penalty
@@ -404,27 +374,31 @@ def build_finite_substrate_hamiltonian(params: FiniteSubstrateParams) -> csr_mat
         gauss_energy = 0.5 * params.lambda_G * np.sum(G * G)
         H[idx, idx] += gauss_energy
 
-        # contact spin term at overlap
+        # Contact spin term at overlap
         if r1 == r2:
             sz1 = +0.5 if s1 == 0 else -0.5
             sz2 = +0.5 if s2 == 0 else -0.5
 
+            # Heisenberg Sz1 Sz2
             H[idx, idx] += params.J_exch * (sz1 * sz2)
+
+            # Triplet penalty for parallel spins
             if s1 == s2:
                 H[idx, idx] += params.lambda_T
 
+            # Singlet bonus and spin flip for opposite spins
             if s1 != s2:
                 H[idx, idx] += params.lambda_S
                 s1p, s2p = s2, s1
                 idx_flip = encode_basis(r1, s1p, r2, s2p, Ns)
                 H[idx_flip, idx] += 0.5 * params.J_exch
 
-        # hopping (particle 1)
+        # Hopping for particle 1
         for r1p in neighbors[r1]:
             idx_new = encode_basis(r1p, s1, r2, s2, Ns)
             H[idx_new, idx] += -params.J_hop
 
-        # hopping (particle 2)
+        # Hopping for particle 2
         for r2p in neighbors[r2]:
             idx_new = encode_basis(r1, s1, r2p, s2, Ns)
             H[idx_new, idx] += -params.J_hop
@@ -432,7 +406,7 @@ def build_finite_substrate_hamiltonian(params: FiniteSubstrateParams) -> csr_mat
     return H.tocsr()
 
 
-def antisymmetry_metrics(psi: np.ndarray, params: FiniteSubstrateParams) -> Dict[str, float]:
+def antisymmetry_metrics(psi: np.ndarray, params: SubstrateParams):
     Lx, Ly = params.Lx, params.Ly
     Ns = Lx * Ly
     dim = Ns * 2 * Ns * 2
@@ -465,7 +439,7 @@ def antisymmetry_metrics(psi: np.ndarray, params: FiniteSubstrateParams) -> Dict
     }
 
 
-def overlap_and_spin_metrics(psi: np.ndarray, params: FiniteSubstrateParams) -> Dict[str, float]:
+def overlap_and_spin_metrics(psi: np.ndarray, params: SubstrateParams):
     Lx, Ly = params.Lx, params.Ly
     Ns = Lx * Ly
     dim = Ns * 2 * Ns * 2
@@ -514,7 +488,7 @@ def overlap_and_spin_metrics(psi: np.ndarray, params: FiniteSubstrateParams) -> 
     }
 
 
-def gauss_energy_expectation(psi: np.ndarray, params: FiniteSubstrateParams) -> float:
+def gauss_energy_expectation(psi: np.ndarray, params: SubstrateParams) -> float:
     Lx, Ly = params.Lx, params.Ly
     Ns = Lx * Ly
     dim = Ns * 2 * Ns * 2
@@ -527,6 +501,7 @@ def gauss_energy_expectation(psi: np.ndarray, params: FiniteSubstrateParams) -> 
         amp = psi[idx]
         if abs(amp) < 1e-14:
             continue
+
         r1, s1, r2, s2 = decode_basis(idx, Ns)
         occ = np.zeros(Ns, dtype=int)
         occ[r1] += 1
@@ -538,20 +513,16 @@ def gauss_energy_expectation(psi: np.ndarray, params: FiniteSubstrateParams) -> 
     return float(E_gauss)
 
 
-def run_finite_substrate_experiment(params: FiniteSubstrateParams) -> Dict[str, Any]:
-    """
-    Build the finite-Hilbert Hamiltonian, diagonalize the ground state,
-    and compute antisymmetry + overlap diagnostics.
-    """
+def run_substrate_ground_state(params: SubstrateParams):
     print("======================================================================")
-    print("FINITE-HILBERT SUBSTRATE: TWO-EXCITATION SECTOR (substrate_engine)")
+    print("FINITE-HILBERT SUBSTRATE: TWO-EXCITATION SECTOR")
     print("======================================================================")
     print("Substrate parameters:")
     for k, v in asdict(params).items():
         print(f"  {k:15s} = {v}")
     print("----------------------------------------------------------------------")
 
-    H = build_finite_substrate_hamiltonian(params)
+    H = build_substrate_hamiltonian(params)
     dim = H.shape[0]
     print(f"[INFO] Hilbert dimension (two excitations) = {dim}")
     print("[INFO] Solving for ground state (smallest eigenvalue)...")
@@ -608,144 +579,26 @@ def run_finite_substrate_experiment(params: FiniteSubstrateParams) -> Dict[str, 
 
 
 # =============================================================================
-# SECTION 3: CHSH DIMER / BELL-TEST CORE
-# =============================================================================
-
-@dataclass
-class CHSHParams:
-    J: float = 1.0
-    hz: float = 0.0
-    t_max: float = 5.0
-    n_steps: int = 50
-    initial_state: str = "bell"  # "bell" or "product"
-
-
-def build_chsh_operators():
-    sx = sigmax()
-    sy = sigmay()
-    sz = sigmaz()
-    I = qeye(2)
-
-    # Measurement directions for maximal CHSH violation with the singlet:
-    # a  = z, a' = x
-    # b  = (z + x)/sqrt(2), b' = (z - x)/sqrt(2)
-    a = sz
-    ap = sx
-
-    b = (sz + sx) / np.sqrt(2.0)
-    bp = (sz - sx) / np.sqrt(2.0)
-
-    A = tensor(a, I)
-    Ap = tensor(ap, I)
-    B = tensor(I, b)
-    Bp = tensor(I, bp)
-
-    B_chsh = A * B + A * Bp + Ap * B - Ap * Bp
-    return B_chsh
-
-
-def build_heisenberg_hamiltonian(J: float, hz: float):
-    sx = sigmax()
-    sy = sigmay()
-    sz = sigmaz()
-    I = qeye(2)
-
-    sx1 = tensor(sx, I)
-    sy1 = tensor(sy, I)
-    sz1 = tensor(sz, I)
-
-    sx2 = tensor(I, sx)
-    sy2 = tensor(I, sy)
-    sz2 = tensor(I, sz)
-
-    H_exch = J * (sx1 * sx2 + sy1 * sy2 + sz1 * sz2)
-    H_field = 0.5 * hz * (sz1 + sz2)
-    return H_exch + H_field
-
-
-def build_initial_state(initial_state: str):
-    if initial_state == "bell":
-        up = basis(2, 0)
-        down = basis(2, 1)
-        psi = (tensor(up, down) - tensor(down, up)).unit()  # singlet
-        return psi
-    else:
-        up = basis(2, 0)
-        return tensor(up, up)  # product state
-
-
-def run_chsh_dimer_experiment(params: CHSHParams) -> Dict[str, Any]:
-    """
-    Heisenberg dimer with CHSH operator.
-    Time-evolve and compute S(t) = <B_CHSH>_t.
-    """
-    print("======================================================================")
-    print("CHSH DIMER EVOLUTION (substrate_engine)")
-    print("======================================================================")
-    print("CHSH parameters:")
-    for k, v in asdict(params).items():
-        print(f"  {k:15s} = {v}")
-    print("----------------------------------------------------------------------")
-
-    H = build_heisenberg_hamiltonian(params.J, params.hz)
-    B_chsh = build_chsh_operators()
-    psi0 = build_initial_state(params.initial_state)
-
-    tlist = np.linspace(0.0, params.t_max, params.n_steps)
-    result = mesolve(H, psi0, tlist, [], [])
-    S_vals = np.array([expect(B_chsh, state) for state in result.states])
-
-    max_idx = int(np.argmax(np.abs(S_vals)))
-    S_max = float(S_vals[max_idx])
-    t_max_S = float(tlist[max_idx])
-
-    print("Time series (first few points):")
-    print("   t        S(t)")
-    print("  ----------------------")
-    for i in range(min(6, len(tlist))):
-        print(f"  {tlist[i]:6.4f}   {S_vals[i]:6.4f}")
-    print("  ...")
-    print("----------------------------------------------------------------------")
-    print(f"Max |S(t)|: {abs(S_max):.6f} at t = {t_max_S:.6f}")
-    print()
-    print("Notes:")
-    print("  - Local realistic theories satisfy |S| ≤ 2.")
-    print("  - Quantum mechanics allows |S| up to 2√2 ≈ 2.828 (Tsirelson bound).")
-    print("  - With the Bell (singlet) state and these measurement settings,")
-    print("    you should see |S(t)| near 2.828 at some times (including t=0).")
-    print("======================================================================")
-
-    return {
-        "t": tlist,
-        "S_t": S_vals,
-        "S_max": S_max,
-        "t_at_S_max": t_max_S,
-    }
-
-
-# =============================================================================
-# SECTION 4: CLI / MAIN
+# SECTION 3: CLI / MAIN
 # =============================================================================
 
 def parse_args():
     p = argparse.ArgumentParser(
-        description="substrate_engine: unified Dirac+EM gauge lab, "
-                    "finite-Hilbert antisymmetry, and CHSH dimer core."
+        description=(
+            "Unified substrate lab: Dirac+EM gauge symmetry test "
+            "and finite-Hilbert two-excitation antisymmetry model."
+        )
     )
 
     # Which experiments to run
     p.add_argument("--run-dirac", action="store_true",
                    help="Run Dirac+EM gauge symmetry test.")
     p.add_argument("--no-run-dirac", action="store_true",
-                   help="Disable Dirac+EM test.")
+                   help="Disable Dirac+EM test (overrides --run-dirac).")
     p.add_argument("--run-finite", action="store_true",
                    help="Run finite-Hilbert antisymmetry model.")
     p.add_argument("--no-run-finite", action="store_true",
-                   help="Disable finite-Hilbert model.")
-    p.add_argument("--run-chsh", action="store_true",
-                   help="Run CHSH dimer experiment.")
-    p.add_argument("--no-run-chsh", action="store_true",
-                   help="Disable CHSH dimer experiment.")
+                   help="Disable finite-Hilbert model (overrides --run-finite).")
 
     # Dirac+EM parameters
     p.add_argument("--Nx", type=int, default=32, help="Grid size in x.")
@@ -791,21 +644,9 @@ def parse_args():
     p.add_argument("--lambda-T", type=float, default=0.0, dest="lambda_T",
                    help="Triplet penalty at overlap (finite model).")
     p.add_argument("--J-exch", type=float, default=1.0, dest="J_exch",
-                   help="Exchange strength at overlap (finite model).")
+                   help="Heisenberg-like exchange strength at overlap (finite model).")
     p.add_argument("--max-eigsh-iter", type=int, default=5000,
                    help="Maximum iterations for eigsh diagonalization.")
-
-    # CHSH parameters
-    p.add_argument("--chsh-J", type=float, default=1.0,
-                   help="Heisenberg coupling J for CHSH dimer.")
-    p.add_argument("--chsh-hz", type=float, default=0.0,
-                   help="Longitudinal field hz for CHSH dimer.")
-    p.add_argument("--chsh-t-max", type=float, default=5.0,
-                   help="Maximum time for CHSH evolution.")
-    p.add_argument("--chsh-n-steps", type=int, default=50,
-                   help="Number of time steps for CHSH evolution.")
-    p.add_argument("--chsh-initial", type=str, default="bell",
-                   help="Initial state for CHSH dimer ('bell' or 'product').")
 
     return p.parse_args()
 
@@ -813,10 +654,9 @@ def parse_args():
 def main():
     args = parse_args()
 
-    # defaults: run all three unless explicitly disabled
+    # Defaults: run both unless explicitly disabled
     run_dirac = True
     run_finite = True
-    run_chsh = True
 
     if args.run_dirac:
         run_dirac = True
@@ -828,34 +668,11 @@ def main():
     if args.no_run_finite:
         run_finite = False
 
-    if args.run_chsh:
-        run_chsh = True
-    if args.no_run_chsh:
-        run_chsh = False
-
     if run_dirac:
-        dparams = DiracGaugeParams(
-            Nx=args.Nx,
-            Ny=args.Ny,
-            dx=args.dx,
-            dt=args.dt,
-            steps=args.steps,
-            c=args.c,
-            q=args.q,
-            m=args.m,
-            defrag=args.defrag,
-            defrag_kappa=args.defrag_kappa,
-            defrag_lambda=args.defrag_lambda,
-            defrag_g=args.defrag_g,
-            chi_amp=args.chi_amp,
-            chi_mode_x=args.chi_mode_x,
-            chi_mode_y=args.chi_mode_y,
-            out_dir=args.out_dir,
-        )
-        run_dirac_gauge_experiment(dparams)
+        run_dirac_gauge_symmetry_lab(args)
 
     if run_finite:
-        fparams = FiniteSubstrateParams(
+        sub_params = SubstrateParams(
             Lx=args.Lx,
             Ly=args.Ly,
             J_hop=args.J_hop,
@@ -868,17 +685,7 @@ def main():
             J_exch=args.J_exch,
             max_eigsh_iter=args.max_eigsh_iter,
         )
-        run_finite_substrate_experiment(fparams)
-
-    if run_chsh:
-        cparams = CHSHParams(
-            J=args.chsh_J,
-            hz=args.chsh_hz,
-            t_max=args.chsh_t_max,
-            n_steps=args.chsh_n_steps,
-            initial_state=args.chsh_initial,
-        )
-        run_chsh_dimer_experiment(cparams)
+        run_substrate_ground_state(sub_params)
 
 
 if __name__ == "__main__":
