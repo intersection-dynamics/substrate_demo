@@ -1,0 +1,28 @@
+{
+  "gauss_sweep": {
+    "max_abs_S": 2.8284271247461925,
+    "lambda_at_max_abs_S": 3.0,
+    "bell_violation_any": true,
+    "first_lambda_with_violation": 0.0
+  },
+  "exchange_sweep": {
+    "max_abs_S": 2.8284271247461907,
+    "J_at_max_abs_S": 0.30000000000000004,
+    "bell_violation_any": true,
+    "first_J_with_violation": 0.0,
+    "violation_at_J_exch_0": true,
+    "abs_S_at_J_exch_0": 2.8025849869968065
+  },
+  "sequential_perturbation_test": {
+    "corr_overlap_vs_abs_delta_E": -0.49154136576035207,
+    "corr_overlap_vs_abs_delta_S": -0.3558654495282113,
+    "n_steps": 15
+  },
+  "information_extraction_test": {
+    "total_delta_S_substrate": 0.0067551259157809795,
+    "total_delta_I_classical": 0.059324413035141355,
+    "total_delta_energy": 0.2404790831139323,
+    "corr_delta_I_vs_abs_delta_E": 0.4127371984751359,
+    "n_steps": 20
+  }
+}
