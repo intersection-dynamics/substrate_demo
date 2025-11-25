@@ -1,0 +1,14 @@
+{
+  "J_hop": 1.0,
+  "J_merge": 0.3,
+  "J_split": 1.0,
+  "U_double": 2.0,
+  "decoherence_every": 10,
+  "dt": 0.05,
+  "n_sites": 6,
+  "p0": 0.6,
+  "p1": 0.3,
+  "p2": 0.1,
+  "seed": 1,
+  "steps": 400
+}

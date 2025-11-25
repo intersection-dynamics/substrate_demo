@@ -1,0 +1,56 @@
+{
+  "diagnostics": {
+    "abs_energy_drift": 0.04431446106604953,
+    "abs_norm_drift": 0.024802517175704968,
+    "notes": [
+      "Energy drift abs=4.431e-02, rel=1.605",
+      "Norm drift abs=2.480e-02, rel=2.486"
+    ],
+    "rel_energy_drift": 1.6049459956857823,
+    "rel_norm_drift": 2.4863154150909628,
+    "stable": false
+  },
+  "framework_version": "substrate_engine_v1",
+  "metrics": {
+    "E_final": 0.07192564623064086,
+    "E_initial": 0.02761118516459133,
+    "E_max": 0.1117595045312109,
+    "E_min": 0.02761118516459133,
+    "N_final": 0.03477812888818657,
+    "N_initial": 0.009975611712481604,
+    "fermion_com_final": [
+      5.062326088616939,
+      15.945232964645655,
+      11.298459799301918
+    ],
+    "fermion_lump_count_final": 0,
+    "fermion_phi_max_final": 0.18221031236289653,
+    "fermion_phi_rms_final": 0.0827741188324731
+  },
+  "params": {
+    "dt": 0.01,
+    "g_bf": 0.0,
+    "grid_size": 16,
+    "init_boson_amp": 0.05,
+    "init_fermion_amp": 0.05,
+    "lambda4_boson": 1.0,
+    "lambda4_fermion": 2.0,
+    "lump_min_voxels": 4,
+    "lump_sigma_threshold": 2.0,
+    "mass2_boson": 1.0,
+    "mass2_fermion": -0.5,
+    "n_boson": 1,
+    "n_color": 3,
+    "n_spin": 1,
+    "seed": 0,
+    "steps": 200
+  },
+  "run_id": "20251124_194623_dt+0p01_m2f-0p5_s0",
+  "script": "substrate_pointer_exp.py",
+  "timestamp": "2025-11-24T19:46:24.360587",
+  "verdicts": {
+    "energy_reasonable": false,
+    "has_fermion_lumps": false,
+    "norm_reasonable": false
+  }
+}

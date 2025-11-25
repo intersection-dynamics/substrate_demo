@@ -1,0 +1,45 @@
+{
+  "cli_args": {
+    "J_hop": 1.0,
+    "J_merge": 0.3,
+    "J_split": 1.0,
+    "U_double": 2.0,
+    "decoherence_every": 10,
+    "dt": 0.05,
+    "n_sites": 6,
+    "output_root": "outputs",
+    "p0": 0.6,
+    "p1": 0.3,
+    "p2": 0.1,
+    "quiet": false,
+    "seed": 1,
+    "steps": 400,
+    "tag": "baseline"
+  },
+  "engine_params": {
+    "J_hop": 1.0,
+    "J_merge": 0.3,
+    "J_split": 1.0,
+    "U_double": 2.0,
+    "decoherence_every": 10,
+    "dt": 0.05,
+    "n_sites": 6,
+    "p0": 0.6,
+    "p1": 0.3,
+    "p2": 0.1,
+    "seed": 1,
+    "steps": 400
+  },
+  "framework_version": "hilbert_substrate_v1",
+  "git": {
+    "branch": null,
+    "commit": null,
+    "dirty": null
+  },
+  "output_root": "outputs",
+  "run_id": "20251124_224518_baseline",
+  "script": "hilbert_substrate_exp.py",
+  "seed": 1,
+  "timestamp": "2025-11-24T22:45:18.639647",
+  "working_dir": "c:\\GitHub\\substrate_demo"
+}

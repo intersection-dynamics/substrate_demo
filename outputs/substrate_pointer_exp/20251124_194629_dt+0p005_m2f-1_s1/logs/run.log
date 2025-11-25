@@ -1,0 +1,13 @@
+[2025-11-24 19:46:29] ==============================================
+[2025-11-24 19:46:29] Experiment: substrate_pointer_exp
+[2025-11-24 19:46:29] Run ID:     20251124_194629_dt+0p005_m2f-1_s1
+[2025-11-24 19:46:29] Output dir: outputs\substrate_pointer_exp\20251124_194629_dt+0p005_m2f-1_s1
+[2025-11-24 19:46:29] ==============================================
+[2025-11-24 19:46:29] CLI args: {'output_root': 'outputs', 'tag': 'dt+0p005_m2f-1_s1', 'grid_size': 16, 'dt': 0.005, 'steps': 200, 'n_boson': 1, 'mass2_boson': 1.0, 'lambda4_boson': 1.0, 'init_boson_amp': 0.05, 'n_color': 3, 'n_spin': 1, 'mass2_fermion': -1.0, 'lambda4_fermion': 2.0, 'init_fermion_amp': 0.05, 'g_bf': 0.0, 'lump_sigma_threshold': 2.0, 'lump_min_voxels': 4, 'seed': 1}
+[2025-11-24 19:46:29] Starting substrate_engine.run_experiment(...)
+[2025-11-24 19:46:29] Engine run completed successfully.
+[2025-11-24 19:46:29] Saving quick-look figures...
+[2025-11-24 19:46:30] ==== Run Summary ====
+[2025-11-24 19:46:30] Metrics: {'E_initial': 0.019992592554119695, 'E_final': 0.05038475634457633, 'E_min': 0.019992592554119695, 'E_max': 0.1017188906539824, 'N_initial': 0.009851393042469164, 'N_final': 0.023944976222814527, 'fermion_lump_count_final': 2, 'fermion_com_final': [11.214049820425206, 15.163287473183395, 8.48610717447757], 'fermion_phi_rms_final': 0.08318157724189176, 'fermion_phi_max_final': 0.17168007108938715}
+[2025-11-24 19:46:30] Run finished successfully.
+[2025-11-24 19:46:30] =====================
