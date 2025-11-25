@@ -16,23 +16,22 @@ You can also tweak CLI flags; run with -h to see options.
 
 from __future__ import annotations
 
-import sys
+import argparse
+from datetime import datetime
 from pathlib import Path
+import json
+import sys
 
-# Ensure repo root is on sys.path so "engines" can be imported
+# ---------------------------------------------------------------------
+# Make sure repo root is on sys.path so "engines" imports correctly
+# ---------------------------------------------------------------------
+
 THIS_FILE = Path(__file__).resolve()
 REPO_ROOT = THIS_FILE.parents[1]  # .../substrate_demo
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from engines import substrate_engine as engine
-
-import argparse
-from datetime import datetime
-from pathlib import Path
-import json
-
-from engines import substrate_engine as engine
+from engines import substrate_engine as engine  # noqa: E402
 
 
 def parse_args() -> argparse.Namespace:
@@ -93,6 +92,8 @@ def main() -> None:
     print("==============================================")
     print("Experiment: substrate_defrag_exp")
     print(f"Run dir:    {run_dir}")
+    print("==============================================")
+    print(f"Using engine module: {engine.__file__}")
     print("==============================================")
 
     # Engine parameters chosen to encourage clumping in fermion-like sector
@@ -197,8 +198,8 @@ def main() -> None:
     print(f"energy_reasonable: {v['energy_reasonable']}")
     print(f"norm_reasonable:   {v['norm_reasonable']}")
     print("====================")
-    print(f"Saved params to:   {params_path}")
-    print(f"Saved summary to:  {summary_path}")
+    print(f"Saved params to:     {params_path}")
+    print(f"Saved summary to:    {summary_path}")
     print(f"Saved timeseries to: {timeseries_path}")
 
 
