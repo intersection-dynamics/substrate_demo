@@ -1,0 +1,132 @@
+# Spin-Statistics Emergence Toolkit
+
+## What This Tests
+
+**Core Question**: Can fermionic antisymmetry emerge from dynamics rather than being assumed?
+
+**Answer**: YES. With spin-spin coupling, the ground state becomes fully antisymmetric 
+(exchange eigenvalue = -1), exhibiting true fermionic behavior including Pauli exclusion.
+
+## Key Results
+
+1. **Antisymmetry emerges** with antiferromagnetic spin coupling (J > 0)
+2. **Pauli exclusion verified**: P(same site, same spin) = 0
+3. **Sectors are dynamically stable**: once fermionic, always fermionic
+
+## Files
+
+- `spin_statistics_engine.py` - Core engine with Hilbert space construction and analysis
+- `test_dynamical_stability.py` - Tests that fermionic/bosonic sectors don't mix under evolution
+
+## Requirements
+
+```
+numpy
+scipy
+```
+
+## Quick Start
+
+```bash
+# Run the main stability test
+python test_dynamical_stability.py
+
+# Run with custom parameters
+python test_dynamical_stability.py --n-sites 6 --J-spin 3.0 --t-max 50
+
+# Run parameter sweep
+python test_dynamical_stability.py --sweep
+
+# See all options
+python test_dynamical_stability.py --help
+```
+
+## Command Line Options
+
+```
+--n-sites      Number of lattice sites (default: 4)
+--t            Hopping amplitude (default: 1.0)
+--U            On-site repulsion (default: 5.0)
+--J-spin       Spin-spin coupling (default: 2.0)
+--t-max        Maximum evolution time (default: 20.0)
+--n-steps      Number of time steps (default: 100)
+--output-dir   Where to save results (default: outputs)
+--sweep        Run parameter sweep instead of single test
+--tag          Tag for output filenames
+```
+
+## Expected Output
+
+```
+======================================================================
+DYNAMICAL STABILITY TEST
+======================================================================
+
+Parameters: n_sites=4, t=1.0, U=5.0, J_spin=2.0
+...
+
+TEST 1: Pure ANTISYMMETRIC initial state
+  Initial exchange eigenvalue: -1.000000
+  ...
+  ✓ ANTISYMMETRIC SECTOR IS STABLE
+
+TEST 2: Pure SYMMETRIC initial state  
+  Initial exchange eigenvalue: 1.000000
+  ...
+  ✓ SYMMETRIC SECTOR IS STABLE
+
+======================================================================
+SUMMARY
+======================================================================
+
+✓ ALL TESTS PASSED
+
+The fermionic (antisymmetric) and bosonic (symmetric) sectors
+are DYNAMICALLY STABLE under Hamiltonian evolution.
+```
+
+## Physics Interpretation
+
+The Hilbert space splits into **superselection sectors**:
+- Antisymmetric (fermionic): exchange eigenvalue = -1
+- Symmetric (bosonic): exchange eigenvalue = +1
+
+These sectors are **closed under Hamiltonian dynamics** - you cannot evolve from one to the other. This is why particle statistics are conserved.
+
+The mechanism:
+1. Antiferromagnetic coupling (J > 0) favors **singlet** spin states
+2. Singlet = antisymmetric under spin exchange
+3. For total antisymmetry, spatial part must be symmetric
+4. Result: Total wavefunction is antisymmetric = FERMIONIC
+
+## Extending the Code
+
+To analyze your own states:
+
+```python
+from spin_statistics_engine import *
+
+# Create Hilbert space
+space = SpinfulParticleSpace(n_sites=6, n_particles=2)
+
+# Build Hamiltonian
+H = build_spinful_hamiltonian(space, t=1.0, U=5.0, J_spin=2.0)
+
+# Find ground state
+E, psi = find_ground_states(H, k=1)
+
+# Full analysis
+analysis = full_analysis(psi[:, 0], space)
+print(f"Exchange eigenvalue: {analysis['exchange_eigenvalue']}")
+print(f"Character: {analysis['character']}")
+```
+
+## Connection to Substrate Framework
+
+This demonstrates one path to emergent fermions:
+- Spin degrees of freedom are **internal substrate structure**
+- Spin-spin coupling is **substrate-mediated interaction**
+- Antisymmetry **emerges** from energetics, not postulated
+
+The stability of sectors shows why statistics appear fundamental even though 
+they emerge from underlying dynamics.

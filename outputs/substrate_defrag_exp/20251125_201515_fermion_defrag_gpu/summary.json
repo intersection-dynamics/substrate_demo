@@ -1,0 +1,34 @@
+{
+  "diagnostics": {
+    "abs_energy_drift": 0.45399305852895944,
+    "abs_norm_drift": 0.01417788278027185,
+    "notes": [
+      "Energy drift abs=4.540e-01, rel=63.966",
+      "backend=cupy"
+    ],
+    "rel_energy_drift": 63.96649656837943,
+    "rel_norm_drift": 2.4460545721602323,
+    "stable": false
+  },
+  "metrics": {
+    "E_final": 0.4610904154718029,
+    "E_initial": 0.007097356942843449,
+    "E_max": 0.7236477253944363,
+    "E_min": 0.007097356942843449,
+    "N_final": 0.01997410782841158,
+    "N_initial": 0.00579622504813973,
+    "fermion_com_final": [
+      6.578875447555574,
+      2.720038701258247,
+      8.253369637042615
+    ],
+    "fermion_lump_count_final": 6,
+    "phi_max_final": 0.16081295518203298,
+    "phi_rms_final": 0.040398593441124835
+  },
+  "verdicts": {
+    "energy_reasonable": false,
+    "has_fermion_lumps": true,
+    "norm_reasonable": true
+  }
+}

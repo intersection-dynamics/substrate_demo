@@ -1,0 +1,31 @@
+{
+  "boson_init_amp": [
+    0.02
+  ],
+  "boson_lambda4": [
+    0.0
+  ],
+  "boson_mass2": [
+    0.0
+  ],
+  "dt": 0.005,
+  "fermion_init_amp": [
+    0.05
+  ],
+  "fermion_lambda4": [
+    1.0
+  ],
+  "fermion_mass2": [
+    -0.2
+  ],
+  "g_bf": 0.0,
+  "grid_size": 24,
+  "lump_min_voxels": 4,
+  "lump_sigma_threshold": 2.0,
+  "n_boson": 1,
+  "n_color": 1,
+  "n_spin": 2,
+  "seed": 1,
+  "steps": 400,
+  "use_gpu": true
+}

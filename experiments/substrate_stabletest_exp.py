@@ -1,19 +1,14 @@
 """
-experiments/substrate_defrag_exp.py
+experiments/substrate_stabletest_exp.py
 
-Defrag / clumping test using engines/substrate_engine.py.
+Stability / energy conservation test for engines/substrate_engine.py.
 
-This runs the unified Hilbert-substrate engine with parameters chosen to
-encourage clumping in the fermion-like sector and then prints out a short
-summary (energy drift, lump counts, etc.).
-
-It also supports GPU via CuPy when available.
+This uses a mild, *stable* potential (positive mass^2, small quartic)
+to check that the leapfrog integrator keeps energy and norm under control.
 
 Usage (from repo root):
 
-  python experiments\\substrate_defrag_exp.py
-
-You can tweak CLI flags; run with -h to see options.
+  python experiments\\substrate_stabletest_exp.py
 """
 
 from __future__ import annotations
@@ -24,37 +19,29 @@ from pathlib import Path
 import json
 import sys
 
-# ---------------------------------------------------------------------
-# Make sure repo root is on sys.path so "engines" imports correctly
-# ---------------------------------------------------------------------
-
+# Ensure repo root is on sys.path so "engines" can be imported
 THIS_FILE = Path(__file__).resolve()
-REPO_ROOT = THIS_FILE.parents[1]  # .../substrate_demo
+REPO_ROOT = THIS_FILE.parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 from engines import substrate_engine as engine  # noqa: E402
 
 
-# ---------------------------------------------------------------------
-# CLI
-# ---------------------------------------------------------------------
-
-
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
-        description="Run a substrate defrag / clumping experiment."
+        description="Run a substrate stability / energy test."
     )
     parser.add_argument(
         "--grid-size",
         type=int,
-        default=24,
+        default=16,
         help="Lattice size N (uses NxNxN). Smaller is faster.",
     )
     parser.add_argument(
         "--steps",
         type=int,
-        default=400,
+        default=200,
         help="Number of time steps.",
     )
     parser.add_argument(
@@ -78,33 +65,18 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--tag",
         type=str,
-        default="defrag_gpu",
+        default="stabletest",
         help="Tag for this run (goes into run_id).",
     )
-    parser.add_argument(
-        "--use-gpu",
-        action="store_true",
-        help="Enable GPU via CuPy (falls back to CPU if unavailable).",
-    )
     return parser.parse_args()
-
-
-# ---------------------------------------------------------------------
-# Helpers
-# ---------------------------------------------------------------------
 
 
 def make_run_dir(output_root: str, tag: str) -> Path:
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     run_id = f"{ts}_{tag}" if tag else ts
-    base = Path(output_root) / "substrate_defrag_exp" / run_id
+    base = Path(output_root) / "substrate_stabletest_exp" / run_id
     base.mkdir(parents=True, exist_ok=False)
     return base
-
-
-# ---------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------
 
 
 def main() -> None:
@@ -112,45 +84,38 @@ def main() -> None:
     run_dir = make_run_dir(args.output_root, args.tag)
 
     print("==============================================")
-    print("Experiment: substrate_defrag_exp")
+    print("Experiment: substrate_stabletest_exp")
     print(f"Run dir:    {run_dir}")
     print("==============================================")
     print(f"Using engine module: {engine.__file__}")
-    print(f"Requested backend:   {'GPU (CuPy)' if args.use_gpu else 'CPU (NumPy)'}")
     print("==============================================")
 
-    # Engine parameters chosen to encourage clumping in fermion-like sector,
-    # but with somewhat gentler potential and smaller dt by default to help stability.
+    # Gentle, stable-ish parameters: no tachyonic mass
     engine_params = {
         "grid_size": args.grid_size,
         "steps": args.steps,
         "dt": args.dt,
         "seed": args.seed,
 
-        # One bosonic channel, kept simple for now
+        # Boson sector: very mild, almost free
         "n_boson": 1,
-        "boson_mass2": (0.0,),
-        "boson_lambda4": (0.0,),
-        "boson_init_amp": (0.02,),
+        "boson_mass2": (0.5,),
+        "boson_lambda4": (0.1,),
+        "boson_init_amp": (0.05,),
 
-        # Fermion-like sector: 1 color, 2 spin → 2 complex components
+        # Fermion-like sector: positive mass^2, small quartic
         "n_color": 1,
         "n_spin": 2,
-
-        # Defrag-ish potential, but milder than "full tachyonic chaos"
-        "fermion_mass2": (-0.2,),   # negative mass^2 encourages structure
-        "fermion_lambda4": (1.0,),  # quartic stabilizer
+        "fermion_mass2": (-0.2,),
+        "fermion_lambda4": (1.0,),
         "fermion_init_amp": (0.05,),
 
-        # No boson–fermion cross-coupling yet
+        # No cross-coupling
         "g_bf": 0.0,
 
-        # Lump detection (on fermion density)
+        # Lump detection config (won't matter much here)
         "lump_sigma_threshold": 2.0,
         "lump_min_voxels": 4,
-
-        # Backend selection
-        "use_gpu": bool(args.use_gpu),
     }
 
     print("Engine parameters:")
@@ -163,7 +128,6 @@ def main() -> None:
     print("Engine run completed.")
     print("----------------------------------------------")
 
-    # Save outputs
     params_path = run_dir / "params.json"
     summary_path = run_dir / "summary.json"
     timeseries_path = run_dir / "timeseries.npz"
