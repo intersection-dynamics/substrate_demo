@@ -1,0 +1,73 @@
+{
+  "diagnostics": {
+    "alice_qubit": 0,
+    "bob_qubit": 1,
+    "substrate_n_qubits": 2,
+    "warnings": [],
+    "within_tsirelson": true
+  },
+  "experiment": "chsh",
+  "framework_version": "0.2.0",
+  "metrics": {
+    "E_AB": -0.7071067811865476,
+    "E_ABp": -0.7071067811865476,
+    "E_ApB": -0.7071067811865476,
+    "E_ApBp": 0.7071067811865476,
+    "S_CHSH": -2.8284271247461903,
+    "classical_bound": 2.0,
+    "tsirelson_bound": 2.8284271247461903
+  },
+  "params": {
+    "cli": {
+      "alice_qubit": 0,
+      "bob_qubit": 1,
+      "coupling": 1.0,
+      "experiment": "chsh",
+      "fidelity_threshold": 0.8,
+      "graph_type": "chain",
+      "n_detections": 8,
+      "n_env_qubits": 3,
+      "n_modes": 6,
+      "n_qubits": null,
+      "n_steps": 200,
+      "n_sys_qubits": 2,
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "occupancy_threshold": 0.1,
+      "output_root": "outputs",
+      "pattern_type": "symmetric",
+      "purity_threshold": 0.8,
+      "seed": 1,
+      "state_type": "singlet",
+      "sys_qubit_index": 0,
+      "t_max": 10.0,
+      "tag": "chsh_baseline"
+    },
+    "engine": {
+      "experiment": {
+        "alice_qubit": 0,
+        "bob_qubit": 1,
+        "bound_tolerance": 1e-06,
+        "classical_bound": 2.0,
+        "noise_strength": 0.0,
+        "noise_type": "none",
+        "seed": 1,
+        "state_type": "singlet",
+        "tsirelson_bound": 2.8284271247461903
+      },
+      "substrate": {
+        "coupling": 1.0,
+        "graph_type": "chain",
+        "n_qubits": 2,
+        "seed": 1
+      }
+    }
+  },
+  "run_id": "20251125_220533_chsh_baseline",
+  "script": "unified_substrate_exp.py",
+  "timestamp": "2025-11-25T22:05:33.508957",
+  "verdicts": {
+    "has_bell_violation": true,
+    "violates_classical_bound": true
+  }
+}

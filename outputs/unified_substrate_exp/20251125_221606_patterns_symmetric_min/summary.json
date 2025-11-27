@@ -1,0 +1,73 @@
+{
+  "diagnostics": {
+    "initial_purity_check": 1.0000000000000004,
+    "n_detections": 1,
+    "n_env_qubits": 1,
+    "n_sys_qubits": 2,
+    "seed": 1,
+    "substrate_n_qubits": 3
+  },
+  "experiment": "patterns",
+  "framework_version": "0.2.0",
+  "metrics": {
+    "fidelity_threshold": 0.8,
+    "final_fidelity": 0.5000000000000001,
+    "final_purity": 0.5000000000000002,
+    "initial_fidelity": 1.0000000000000002,
+    "initial_purity": 1.0000000000000004,
+    "purity_threshold": 0.8
+  },
+  "params": {
+    "cli": {
+      "alice_qubit": 0,
+      "bob_qubit": 1,
+      "coupling": 1.0,
+      "experiment": "patterns",
+      "fidelity_threshold": 0.8,
+      "graph_type": "chain",
+      "n_detections": 1,
+      "n_env_qubits": 1,
+      "n_modes": 6,
+      "n_qubits": null,
+      "n_steps": 200,
+      "n_sys_qubits": 2,
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "occupancy_threshold": 0.1,
+      "output_root": "outputs",
+      "pattern_type": "symmetric",
+      "purity_threshold": 0.8,
+      "seed": 1,
+      "state_type": "singlet",
+      "sys_qubit_index": 0,
+      "t_max": 10.0,
+      "tag": "patterns_symmetric_min"
+    },
+    "engine": {
+      "experiment": {
+        "fidelity_threshold": 0.8,
+        "n_detections": 1,
+        "n_env_qubits": 1,
+        "n_sys_qubits": 2,
+        "pattern_type": "symmetric",
+        "purity_threshold": 0.8,
+        "seed": 1,
+        "sys_qubit_index": 0
+      },
+      "substrate": {
+        "coupling": 1.0,
+        "graph_type": "chain",
+        "n_qubits": 3,
+        "seed": 1
+      }
+    }
+  },
+  "run_id": "20251125_221606_patterns_symmetric_min",
+  "script": "unified_substrate_exp.py",
+  "timestamp": "2025-11-25T22:16:06.581560",
+  "verdicts": {
+    "bosonic_like": false,
+    "classification": "fermionic_like",
+    "fermionic_like": true
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "experiment": "chsh",
+  "framework_version": "0.1.0",
+  "run_id": "20251125_212000_chsh_again",
+  "script": "unified_substrate_exp.py",
+  "seed": 1,
+  "timestamp": "2025-11-25T21:20:00.217721"
+}

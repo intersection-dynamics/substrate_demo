@@ -1,0 +1,31 @@
+==============================================
+Experiment: basin_stability_exp
+Run dir:        outputs\basin_stability_exp\20251125_230946_patterns_antisym_basin
+Experiment mode: patterns
+==============================================
+Baseline engine parameters:
+  experiment: patterns
+  seed: 1
+  pattern_type: antisymmetric
+  n_sys_qubits: 2
+  n_env_qubits: 1
+  n_detections: 1
+  sys_qubit_index: 0
+  fidelity_threshold: 0.8
+  purity_threshold: 0.8
+----------------------------------------------
+Running baseline experiment...
+Baseline run completed.
+----------------------------------------------
+Baseline metrics (key summary):
+final_purity:    0.500000
+final_fidelity:  0.500000
+classification:  fermionic_like
+----------------------------------------------
+Sampling 100 perturbed parameter sets...
+----------------------------------------------
+Basin-of-stability estimate:
+  stable_count:       100 / 100
+  stability_fraction: 1.000
+==============================================
+Outputs written under: outputs\basin_stability_exp\20251125_230946_patterns_antisym_basin

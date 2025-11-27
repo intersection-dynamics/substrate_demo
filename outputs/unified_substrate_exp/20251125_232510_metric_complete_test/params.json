@@ -1,0 +1,41 @@
+{
+  "cli": {
+    "alice_qubit": 0,
+    "bob_qubit": 1,
+    "coupling": 1.0,
+    "experiment": "metric",
+    "fidelity_threshold": 0.8,
+    "graph_type": "complete",
+    "n_detections": 8,
+    "n_env_qubits": 3,
+    "n_modes": 6,
+    "n_qubits": null,
+    "n_steps": 200,
+    "n_sys_qubits": 2,
+    "noise_strength": 0.0,
+    "noise_type": "none",
+    "occupancy_threshold": 0.1,
+    "output_root": "outputs",
+    "pattern_type": "symmetric",
+    "purity_threshold": 0.8,
+    "seed": 1,
+    "state_type": "singlet",
+    "sys_qubit_index": 0,
+    "t_max": 10.0,
+    "tag": "metric_complete_test"
+  },
+  "engine": {
+    "experiment": {
+      "n_steps": 200,
+      "occupancy_threshold": 0.1,
+      "seed": 1,
+      "t_max": 10.0
+    },
+    "substrate": {
+      "coupling": 1.0,
+      "graph_type": "complete",
+      "n_qubits": 6,
+      "seed": 1
+    }
+  }
+}

@@ -1,0 +1,33 @@
+==============================================
+Experiment: unified_substrate_exp
+Run dir:    outputs\unified_substrate_exp\20251125_231919_metric_chain_test
+Experiment mode: metric
+==============================================
+Engine parameters:
+  experiment: metric
+  seed: 1
+  graph_type: chain
+  coupling: 1.0
+  n_modes: 6
+  t_max: 10.0
+  n_steps: 200
+  occupancy_threshold: 0.1
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------
+==== Summary ====
+Experiment mode:    metric
+n_modes:            6
+violation_rate:     0.266667
+
+---- Diagnostics ----
+graph_type: chain
+occupancy_threshold: 0.1
+n_triples_checked: 150
+substrate_n_qubits: 6
+
+---- Verdicts ----
+approximately_metric: False
+==============================================
+Outputs written under: outputs\unified_substrate_exp\20251125_231919_metric_chain_test

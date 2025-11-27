@@ -1,0 +1,33 @@
+{
+  "cli": {
+    "coupling": 1.0,
+    "experiment": "chsh",
+    "fidelity_threshold": 0.8,
+    "graph_type": "chain",
+    "n_detections": 8,
+    "n_env_qubits": 3,
+    "n_modes": 6,
+    "n_steps": 200,
+    "n_sys_qubits": 2,
+    "noise_strength": 0.2,
+    "noise_type": "depolarizing",
+    "occupancy_threshold": 0.1,
+    "output_root": "outputs",
+    "pattern_type": "symmetric",
+    "purity_threshold": 0.8,
+    "seed": 1,
+    "state_type": "singlet",
+    "sys_qubit_index": 0,
+    "t_max": 10.0,
+    "tag": "chsh_noisy"
+  },
+  "engine": {
+    "bound_tolerance": 1e-06,
+    "classical_bound": 2.0,
+    "noise_strength": 0.2,
+    "noise_type": "depolarizing",
+    "seed": 1,
+    "state_type": "singlet",
+    "tsirelson_bound": 2.8284271247461903
+  }
+}

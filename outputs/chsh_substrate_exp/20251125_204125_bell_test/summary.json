@@ -1,0 +1,42 @@
+{
+  "diagnostics": {
+    "warnings": [],
+    "within_tsirelson": true
+  },
+  "framework_version": "0.1.0",
+  "metrics": {
+    "E_AB": -0.7071067811865476,
+    "E_ABp": -0.7071067811865476,
+    "E_ApB": -0.7071067811865476,
+    "E_ApBp": 0.7071067811865476,
+    "S_CHSH": -2.8284271247461903,
+    "classical_bound": 2.0,
+    "tsirelson_bound": 2.8284271247461903
+  },
+  "params": {
+    "cli": {
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "output_root": "outputs",
+      "seed": 1,
+      "state_type": "singlet",
+      "tag": "bell_test"
+    },
+    "engine": {
+      "bound_tolerance": 1e-06,
+      "classical_bound": 2.0,
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "seed": 1,
+      "state_type": "singlet",
+      "tsirelson_bound": 2.8284271247461903
+    }
+  },
+  "run_id": "20251125_204125_bell_test",
+  "script": "chsh_substrate_exp.py",
+  "timestamp": "2025-11-25T20:41:25.276232",
+  "verdicts": {
+    "has_bell_violation": true,
+    "violates_classical_bound": true
+  }
+}

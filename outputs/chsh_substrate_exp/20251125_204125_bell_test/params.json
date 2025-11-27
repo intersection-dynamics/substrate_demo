@@ -1,0 +1,19 @@
+{
+  "cli": {
+    "noise_strength": 0.0,
+    "noise_type": "none",
+    "output_root": "outputs",
+    "seed": 1,
+    "state_type": "singlet",
+    "tag": "bell_test"
+  },
+  "engine": {
+    "bound_tolerance": 1e-06,
+    "classical_bound": 2.0,
+    "noise_strength": 0.0,
+    "noise_type": "none",
+    "seed": 1,
+    "state_type": "singlet",
+    "tsirelson_bound": 2.8284271247461903
+  }
+}

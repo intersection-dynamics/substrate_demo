@@ -1,0 +1,27 @@
+==============================================
+Experiment: lightcone_exp
+Run dir:    outputs\lightcone_exp\20251125_234902_lr_complete_6
+==============================================
+Parameters:
+  graph_type:          complete
+  n_modes:             6
+  t_max:               10.0
+  n_steps:             200
+  occupancy_threshold: 0.1
+  coupling:            1.0
+  seed:                1
+----------------------------------------------
+Computing arrival times from each source...
+==== Lieb–Robinson Light-Cone Summary ====
+n_modes:            6
+n_pairs_used:       30
+v_min:              2.2222222222222223
+v_max:              2.2222222222222223
+v_mean:             2.2222222222222223
+v_median:           2.2222222222222223
+
+---- Verdicts ----
+has_finite_lightcone: True
+suggested_LR_velocity: 2.2222222222222223
+==============================================
+Outputs written under: outputs\lightcone_exp\20251125_234902_lr_complete_6

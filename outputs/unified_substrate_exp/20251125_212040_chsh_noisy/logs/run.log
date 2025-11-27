@@ -1,0 +1,34 @@
+==============================================
+Experiment: unified_substrate_exp
+Run dir:    outputs\unified_substrate_exp\20251125_212040_chsh_noisy
+Experiment mode: chsh
+==============================================
+Engine parameters:
+  experiment: chsh
+  seed: 1
+  state_type: singlet
+  noise_type: depolarizing
+  noise_strength: 0.2
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------
+==== Summary ====
+Experiment mode:    chsh
+S_CHSH:             -2.262742
+classical_bound:    2.000000
+tsirelson_bound:    2.828427
+E(A,B):             -0.565685
+E(A,B'):            -0.565685
+E(A',B):            -0.565685
+E(A',B'):           0.565685
+
+---- Diagnostics ----
+within_tsirelson: True
+warnings: []
+
+---- Verdicts ----
+has_bell_violation: True
+violates_classical_bound: True
+==============================================
+Outputs written under: outputs\unified_substrate_exp\20251125_212040_chsh_noisy

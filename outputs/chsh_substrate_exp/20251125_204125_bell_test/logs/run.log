@@ -1,0 +1,31 @@
+==============================================
+Experiment: chsh_substrate_exp
+Run dir:    outputs\chsh_substrate_exp\20251125_204125_bell_test
+==============================================
+Engine parameters:
+  seed: 1
+  state_type: singlet
+  noise_type: none
+  noise_strength: 0.0
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------
+==== CHSH Summary ====
+S_CHSH:          -2.828427
+classical_bound: 2.000000
+tsirelson_bound: 2.828427
+E(A,B):          -0.707107
+E(A,B'):         -0.707107
+E(A',B):         -0.707107
+E(A',B'):        0.707107
+
+---- Diagnostics ----
+within_tsirelson:      True
+warnings:              []
+
+---- Verdicts ----
+has_bell_violation:    True
+violates_classical_bound: True
+==============================================
+Outputs written under: outputs\chsh_substrate_exp\20251125_204125_bell_test

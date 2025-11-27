@@ -1,0 +1,81 @@
+{
+  "baseline_diagnostics": {
+    "detection_fallback_reason": "",
+    "detection_mode_requested": "phase_sensitive",
+    "detection_mode_used": "phase_sensitive",
+    "initial_purity_check": 1.0000000000000004,
+    "n_detections": 1,
+    "n_env_qubits": 1,
+    "n_sys_qubits": 2,
+    "seed": 1,
+    "substrate_n_qubits": 3
+  },
+  "baseline_metrics": {
+    "fidelity_threshold": 0.8,
+    "final_fidelity": 1.0,
+    "final_purity": 0.9999999999999998,
+    "initial_fidelity": 1.0000000000000002,
+    "initial_purity": 1.0000000000000004,
+    "purity_threshold": 0.8
+  },
+  "baseline_verdicts": {
+    "bosonic_like": true,
+    "classification": "bosonic_like",
+    "fermionic_like": false
+  },
+  "experiment": "patterns",
+  "framework_version": "0.1.0",
+  "params": {
+    "cli": {
+      "coupling": 1.0,
+      "experiment": "patterns",
+      "fidelity_threshold": 0.8,
+      "graph_type": "chain",
+      "n_detections": 1,
+      "n_env_qubits": 1,
+      "n_modes": 6,
+      "n_samples": 100,
+      "n_steps": 200,
+      "n_sys_qubits": 2,
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "occupancy_threshold": 0.1,
+      "output_root": "outputs",
+      "pattern_type": "symmetric",
+      "purity_threshold": 0.8,
+      "seed": 1,
+      "state_type": "singlet",
+      "sys_qubit_index": 0,
+      "t_max": 10.0,
+      "tag": "patterns_symmetric_basin",
+      "variation_frac": 0.25
+    },
+    "engine_baseline": {
+      "experiment": {
+        "detection_mode": "phase_sensitive",
+        "fidelity_threshold": 0.8,
+        "n_detections": 1,
+        "n_env_qubits": 1,
+        "n_sys_qubits": 2,
+        "pattern_type": "symmetric",
+        "purity_threshold": 0.8,
+        "seed": 1,
+        "sys_qubit_index": 0
+      },
+      "substrate": {
+        "coupling": 1.0,
+        "graph_type": "chain",
+        "n_qubits": 3,
+        "seed": 1
+      }
+    }
+  },
+  "run_id": "20251125_231421_patterns_symmetric_basin",
+  "script": "basin_stability_exp.py",
+  "stability": {
+    "n_samples": 100,
+    "stability_fraction": 1.0,
+    "stable_count": 100
+  },
+  "timestamp": "2025-11-25T23:14:21.748383"
+}

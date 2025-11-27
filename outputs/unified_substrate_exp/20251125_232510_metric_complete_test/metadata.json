@@ -1,0 +1,8 @@
+{
+  "experiment": "metric",
+  "framework_version": "0.2.0",
+  "run_id": "20251125_232510_metric_complete_test",
+  "script": "unified_substrate_exp.py",
+  "seed": 1,
+  "timestamp": "2025-11-25T23:25:10.645922"
+}

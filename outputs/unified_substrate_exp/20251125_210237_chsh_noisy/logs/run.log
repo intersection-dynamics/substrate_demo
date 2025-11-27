@@ -1,0 +1,15 @@
+==============================================
+Experiment: unified_substrate_exp
+Run dir:    outputs\unified_substrate_exp\20251125_210237_chsh_noisy
+Experiment mode: chsh
+==============================================
+Engine parameters:
+  experiment: chsh
+  seed: 1
+  state_type: singlet
+  noise_type: depolarizing
+  noise_strength: 0.2
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------

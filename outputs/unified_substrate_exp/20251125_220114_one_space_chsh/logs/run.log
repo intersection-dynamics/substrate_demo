@@ -1,0 +1,15 @@
+==============================================
+Experiment: unified_substrate_exp
+Run dir:    outputs\unified_substrate_exp\20251125_220114_one_space_chsh
+Experiment mode: chsh
+==============================================
+Engine parameters:
+  experiment: chsh
+  seed: 1
+  state_type: singlet
+  noise_type: none
+  noise_strength: 0.0
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------

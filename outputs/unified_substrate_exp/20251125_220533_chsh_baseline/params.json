@@ -1,0 +1,46 @@
+{
+  "cli": {
+    "alice_qubit": 0,
+    "bob_qubit": 1,
+    "coupling": 1.0,
+    "experiment": "chsh",
+    "fidelity_threshold": 0.8,
+    "graph_type": "chain",
+    "n_detections": 8,
+    "n_env_qubits": 3,
+    "n_modes": 6,
+    "n_qubits": null,
+    "n_steps": 200,
+    "n_sys_qubits": 2,
+    "noise_strength": 0.0,
+    "noise_type": "none",
+    "occupancy_threshold": 0.1,
+    "output_root": "outputs",
+    "pattern_type": "symmetric",
+    "purity_threshold": 0.8,
+    "seed": 1,
+    "state_type": "singlet",
+    "sys_qubit_index": 0,
+    "t_max": 10.0,
+    "tag": "chsh_baseline"
+  },
+  "engine": {
+    "experiment": {
+      "alice_qubit": 0,
+      "bob_qubit": 1,
+      "bound_tolerance": 1e-06,
+      "classical_bound": 2.0,
+      "noise_strength": 0.0,
+      "noise_type": "none",
+      "seed": 1,
+      "state_type": "singlet",
+      "tsirelson_bound": 2.8284271247461903
+    },
+    "substrate": {
+      "coupling": 1.0,
+      "graph_type": "chain",
+      "n_qubits": 2,
+      "seed": 1
+    }
+  }
+}

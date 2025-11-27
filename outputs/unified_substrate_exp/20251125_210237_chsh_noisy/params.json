@@ -1,0 +1,55 @@
+{
+  "cli": {
+    "coupling": 1.0,
+    "experiment": "chsh",
+    "fidelity_threshold": 0.8,
+    "graph_type": "chain",
+    "n_detections": 8,
+    "n_env_qubits": 3,
+    "n_modes": 6,
+    "n_steps": 200,
+    "n_sys_qubits": 2,
+    "noise_strength": 0.2,
+    "noise_type": "depolarizing",
+    "occupancy_threshold": 0.1,
+    "output_root": "outputs",
+    "pattern_type": "symmetric",
+    "purity_threshold": 0.8,
+    "seed": 1,
+    "state_type": "singlet",
+    "sys_qubit_index": 0,
+    "t_max": 10.0,
+    "tag": "chsh_noisy"
+  },
+  "engine": {
+    "boson_init_amp": [
+      0.05
+    ],
+    "boson_lambda4": [
+      1.0
+    ],
+    "boson_mass2": [
+      1.0
+    ],
+    "dt": 0.01,
+    "fermion_init_amp": [
+      0.05
+    ],
+    "fermion_lambda4": [
+      1.0
+    ],
+    "fermion_mass2": [
+      1.0
+    ],
+    "g_bf": 0.0,
+    "grid_size": 16,
+    "lump_min_voxels": 4,
+    "lump_sigma_threshold": 2.0,
+    "n_boson": 1,
+    "n_color": 1,
+    "n_spin": 2,
+    "seed": 1,
+    "steps": 200,
+    "use_gpu": false
+  }
+}

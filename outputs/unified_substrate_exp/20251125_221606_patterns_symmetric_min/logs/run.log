@@ -1,0 +1,42 @@
+==============================================
+Experiment: unified_substrate_exp
+Run dir:    outputs\unified_substrate_exp\20251125_221606_patterns_symmetric_min
+Experiment mode: patterns
+==============================================
+Engine parameters:
+  experiment: patterns
+  seed: 1
+  graph_type: chain
+  coupling: 1.0
+  n_sys_qubits: 2
+  n_env_qubits: 1
+  pattern_type: symmetric
+  n_detections: 1
+  sys_qubit_index: 0
+  fidelity_threshold: 0.8
+  purity_threshold: 0.8
+----------------------------------------------
+Running engine...
+Engine run completed.
+----------------------------------------------
+==== Summary ====
+Experiment mode:    patterns
+initial_purity:     1.000000
+final_purity:       0.500000
+initial_fidelity:   1.000000
+final_fidelity:     0.500000
+
+---- Diagnostics ----
+seed: 1
+n_sys_qubits: 2
+n_env_qubits: 1
+n_detections: 1
+initial_purity_check: 1.0000000000000004
+substrate_n_qubits: 3
+
+---- Verdicts ----
+classification: fermionic_like
+bosonic_like: False
+fermionic_like: True
+==============================================
+Outputs written under: outputs\unified_substrate_exp\20251125_221606_patterns_symmetric_min

@@ -1,0 +1,37 @@
+{
+  "diagnostics": {
+    "coupling": 1.0,
+    "graph_type": "chain",
+    "n_steps": 200,
+    "occupancy_threshold": 0.1,
+    "t_max": 10.0
+  },
+  "metrics": {
+    "n_modes": 6,
+    "n_pairs_used": 30,
+    "v_max": 2.8571428571428568,
+    "v_mean": 2.3398288856488025,
+    "v_median": 2.1052631578947367,
+    "v_min": 1.9354838709677418
+  },
+  "params": {
+    "cli": {
+      "coupling": 1.0,
+      "graph_type": "chain",
+      "n_modes": 6,
+      "n_steps": 200,
+      "occupancy_threshold": 0.1,
+      "output_root": "outputs",
+      "seed": 1,
+      "t_max": 10.0,
+      "tag": "lr_chain_6"
+    }
+  },
+  "run_id": "20251125_234333_lr_chain_6",
+  "script": "lightcone_exp.py",
+  "timestamp": "2025-11-25T23:43:33.334325",
+  "verdicts": {
+    "has_finite_lightcone": true,
+    "suggested_LR_velocity": 2.8571428571428568
+  }
+}

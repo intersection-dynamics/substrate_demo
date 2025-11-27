@@ -1,0 +1,94 @@
+{
+  "diagnostics": {
+    "abs_energy_drift": 0.4859806188519156,
+    "abs_norm_drift": 0.024815653608806398,
+    "notes": [
+      "Energy drift abs=4.860e-01, rel=26.281",
+      "backend=numpy"
+    ],
+    "rel_energy_drift": 26.28145514892063,
+    "rel_norm_drift": 2.5172527987125894,
+    "stable": false
+  },
+  "experiment": "chsh",
+  "framework_version": "0.1.0",
+  "metrics": {
+    "E_final": 0.5044720081641956,
+    "E_initial": 0.018491389312279942,
+    "E_max": 0.8107274703066154,
+    "E_min": 0.018491389312279942,
+    "N_final": 0.03467388223864365,
+    "N_initial": 0.009858228629837252,
+    "fermion_com_final": [
+      8.564688056987395,
+      15.274761812208572,
+      7.417155121764928
+    ],
+    "fermion_lump_count_final": 2,
+    "phi_max_final": 0.1446472535357339,
+    "phi_rms_final": 0.050229354959937626
+  },
+  "params": {
+    "cli": {
+      "coupling": 1.0,
+      "experiment": "chsh",
+      "fidelity_threshold": 0.8,
+      "graph_type": "chain",
+      "n_detections": 8,
+      "n_env_qubits": 3,
+      "n_modes": 6,
+      "n_steps": 200,
+      "n_sys_qubits": 2,
+      "noise_strength": 0.2,
+      "noise_type": "depolarizing",
+      "occupancy_threshold": 0.1,
+      "output_root": "outputs",
+      "pattern_type": "symmetric",
+      "purity_threshold": 0.8,
+      "seed": 1,
+      "state_type": "singlet",
+      "sys_qubit_index": 0,
+      "t_max": 10.0,
+      "tag": "chsh_noisy"
+    },
+    "engine": {
+      "boson_init_amp": [
+        0.05
+      ],
+      "boson_lambda4": [
+        1.0
+      ],
+      "boson_mass2": [
+        1.0
+      ],
+      "dt": 0.01,
+      "fermion_init_amp": [
+        0.05
+      ],
+      "fermion_lambda4": [
+        1.0
+      ],
+      "fermion_mass2": [
+        1.0
+      ],
+      "g_bf": 0.0,
+      "grid_size": 16,
+      "lump_min_voxels": 4,
+      "lump_sigma_threshold": 2.0,
+      "n_boson": 1,
+      "n_color": 1,
+      "n_spin": 2,
+      "seed": 1,
+      "steps": 200,
+      "use_gpu": false
+    }
+  },
+  "run_id": "20251125_210237_chsh_noisy",
+  "script": "unified_substrate_exp.py",
+  "timestamp": "2025-11-25T21:02:44.743679",
+  "verdicts": {
+    "energy_reasonable": false,
+    "has_fermion_lumps": true,
+    "norm_reasonable": true
+  }
+}

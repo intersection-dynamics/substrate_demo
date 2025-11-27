@@ -1,0 +1,1219 @@
+[
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "hopping",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7222222222222222,
+    "is_universal": true,
+    "runtime": 3.0859081745147705
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "hopping",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.42169189453125
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "hopping",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.3056883811950684
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "hopping",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.9070918273360331,
+      "symmetric": 0.9055893504822955,
+      "antisymmetric": 0.9190425296877118
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.540362596511841
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "heisenberg",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7222222222222222,
+    "is_universal": true,
+    "runtime": 2.451794147491455
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "heisenberg",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.3841123580932617
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "heisenberg",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.4011425971984863
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "heisenberg",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.9068746772022667,
+      "symmetric": 0.9228096983365481,
+      "antisymmetric": 0.9127814149930336
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.514475107192993
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "xy",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7222222222222222,
+    "is_universal": true,
+    "runtime": 2.428313970565796
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "xy",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.431832790374756
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "xy",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.3187899589538574
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "xy",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9999999999999999,
+    "metric_quality": 0.6666666666666667,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.8542575814408622,
+      "symmetric": 0.9289208648738821,
+      "antisymmetric": 0.8194651328201867
+    },
+    "overall": 0.5555555555555555,
+    "is_universal": false,
+    "runtime": 2.523503065109253
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "random",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.7637626158259733,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7545875386086577,
+    "is_universal": true,
+    "runtime": 2.5220236778259277
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "random",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.7637626158259733,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.587920871941991,
+    "is_universal": false,
+    "runtime": 2.4008820056915283
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "random",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.7637626158259733,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.587920871941991,
+    "is_universal": false,
+    "runtime": 2.460674285888672
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "chain",
+      "hamiltonian": "random",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.7637626158259733,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.05909301829170199,
+    "pattern_fidelities": {
+      "local": 0.9650181251090226,
+      "symmetric": 0.9342749734801693,
+      "antisymmetric": 0.8775752401544721
+    },
+    "overall": 0.6076185447058917,
+    "is_universal": false,
+    "runtime": 3.1699421405792236
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "hopping",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7266526290040742,
+    "is_universal": true,
+    "runtime": 3.468111515045166
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "hopping",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.5346240997314453
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "hopping",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.3778891563415527
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "hopping",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.03564947891533543,
+    "pattern_fidelities": {
+      "local": 0.9469995136460894,
+      "symmetric": 0.8947931496839533,
+      "antisymmetric": 0.9279069197775546
+    },
+    "overall": 0.5718691219758527,
+    "is_universal": false,
+    "runtime": 3.350271701812744
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "heisenberg",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7266526290040742,
+    "is_universal": true,
+    "runtime": 3.5574545860290527
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "heisenberg",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.560694456100464
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "heisenberg",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.281287431716919
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "heisenberg",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.007725735789679056,
+    "pattern_fidelities": {
+      "local": 0.9491826697706672,
+      "symmetric": 0.9353863824217437,
+      "antisymmetric": 0.9475274855402328
+    },
+    "overall": 0.562561207600634,
+    "is_universal": false,
+    "runtime": 3.550724744796753
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "xy",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7266526290040742,
+    "is_universal": true,
+    "runtime": 3.8409242630004883
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "xy",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.3269970417022705
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "xy",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.4927427768707275
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "xy",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.9799578870122228,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.8460693377928828,
+      "symmetric": 0.8710770123236772,
+      "antisymmetric": 0.9000209030907435
+    },
+    "overall": 0.5599859623374076,
+    "is_universal": false,
+    "runtime": 3.710768938064575
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "random",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.2533626556396484
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "random",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.3333333333333333,
+    "is_universal": false,
+    "runtime": 2.3949084281921387
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "random",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.3333333333333333,
+    "is_universal": false,
+    "runtime": 2.356602430343628
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "ring",
+      "hamiltonian": "random",
+      "detection": "random"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.9071159757137528,
+      "symmetric": 0.9174235132013902,
+      "antisymmetric": 0.9315966823266121
+    },
+    "overall": 0.3333333333333333,
+    "is_universal": false,
+    "runtime": 2.588057279586792
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "hopping",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7284836281017757,
+    "is_universal": true,
+    "runtime": 2.3760578632354736
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "hopping",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 2.6990928649902344
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "hopping",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.623600959777832
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "hopping",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.03765371349278024,
+    "pattern_fidelities": {
+      "local": 0.9787669650242071,
+      "symmetric": 0.9368847562636997,
+      "antisymmetric": 0.9453417467991541
+    },
+    "overall": 0.5743681992660358,
+    "is_universal": false,
+    "runtime": 3.546030282974243
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "heisenberg",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7284836281017757,
+    "is_universal": true,
+    "runtime": 3.6643505096435547
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "heisenberg",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.5386595726013184
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "heisenberg",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.3860363960266113
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "heisenberg",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.9026344510797191,
+      "symmetric": 0.9235275297852498,
+      "antisymmetric": 0.8859010762897235
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.7769763469696045
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "xy",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.7284836281017757,
+    "is_universal": true,
+    "runtime": 3.5408506393432617
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "xy",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.584649085998535
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "xy",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.4602670669555664
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "xy",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.985450884305327,
+    "metric_quality": 0.7,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.8751582334823814,
+      "symmetric": 0.8906188399125288,
+      "antisymmetric": 0.8858520092709408
+    },
+    "overall": 0.5618169614351091,
+    "is_universal": false,
+    "runtime": 3.679901123046875
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "random",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.56378173828125
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "random",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.3333333333333333,
+    "is_universal": false,
+    "runtime": 3.4927470684051514
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "random",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.3333333333333333,
+    "is_universal": false,
+    "runtime": 3.384773015975952
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "square",
+      "hamiltonian": "random",
+      "detection": "random"
+    },
+    "light_cone_quality": 0,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.006108043748163983,
+    "pattern_fidelities": {
+      "local": 0.9089556168930226,
+      "symmetric": 0.9437803734920656,
+      "antisymmetric": 0.8619147727976518
+    },
+    "overall": 0.33536934791605466,
+    "is_universal": false,
+    "runtime": 3.662395715713501
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "hopping",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.6666666666666666,
+    "is_universal": true,
+    "runtime": 3.264113426208496
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "hopping",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.3530092239379883
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "hopping",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.4170312881469727
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "hopping",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0.0022338748001917708,
+    "pattern_fidelities": {
+      "local": 0.9238158114549126,
+      "symmetric": 0.91469062976104,
+      "antisymmetric": 0.9284732435484018
+    },
+    "overall": 0.5007446249333972,
+    "is_universal": false,
+    "runtime": 3.637822151184082
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "heisenberg",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.6666666666666666,
+    "is_universal": true,
+    "runtime": 3.455747365951538
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "heisenberg",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.6311442852020264
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "heisenberg",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.4689652919769287
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "heisenberg",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.8962434241591003,
+      "symmetric": 0.9327284131160776,
+      "antisymmetric": 0.8819805126445303
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.632572889328003
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "xy",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.6666666666666666,
+    "is_universal": true,
+    "runtime": 3.365208625793457
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "xy",
+      "detection": "swap"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.10447330470336291,
+      "symmetric": 0.11450667382415922,
+      "antisymmetric": 0.11450667382415922
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 3.2368927001953125
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "xy",
+      "detection": "zz"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 1.0,
+      "antisymmetric": 1.0
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 2.323354959487915
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "xy",
+      "detection": "random"
+    },
+    "light_cone_quality": 0.6666666666666667,
+    "metric_quality": 0.8333333333333334,
+    "statistics_gap": 0,
+    "pattern_fidelities": {
+      "local": 0.9091876946696005,
+      "symmetric": 0.9221861670695539,
+      "antisymmetric": 0.9394532491643135
+    },
+    "overall": 0.5,
+    "is_universal": false,
+    "runtime": 2.4555375576019287
+  },
+  {
+    "config": {
+      "n_modes": 6,
+      "dim_per_mode": 2,
+      "lattice": "honeycomb",
+      "hamiltonian": "random",
+      "detection": "cnot"
+    },
+    "light_cone_quality": 0.16666666666666669,
+    "metric_quality": 1.0,
+    "statistics_gap": 0.5000000000000001,
+    "pattern_fidelities": {
+      "local": 1.0,
+      "symmetric": 0.4999999999999999,
+      "antisymmetric": 0.4999999999999999
+    },
+    "overall": 0.5555555555555557,
+    "is_universal": 

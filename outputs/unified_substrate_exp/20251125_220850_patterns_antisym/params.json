@@ -1,0 +1,45 @@
+{
+  "cli": {
+    "alice_qubit": 0,
+    "bob_qubit": 1,
+    "coupling": 1.0,
+    "experiment": "patterns",
+    "fidelity_threshold": 0.8,
+    "graph_type": "chain",
+    "n_detections": 12,
+    "n_env_qubits": 3,
+    "n_modes": 6,
+    "n_qubits": null,
+    "n_steps": 200,
+    "n_sys_qubits": 2,
+    "noise_strength": 0.0,
+    "noise_type": "none",
+    "occupancy_threshold": 0.1,
+    "output_root": "outputs",
+    "pattern_type": "antisymmetric",
+    "purity_threshold": 0.8,
+    "seed": 1,
+    "state_type": "singlet",
+    "sys_qubit_index": 0,
+    "t_max": 10.0,
+    "tag": "patterns_antisym"
+  },
+  "engine": {
+    "experiment": {
+      "fidelity_threshold": 0.8,
+      "n_detections": 12,
+      "n_env_qubits": 3,
+      "n_sys_qubits": 2,
+      "pattern_type": "antisymmetric",
+      "purity_threshold": 0.8,
+      "seed": 1,
+      "sys_qubit_index": 0
+    },
+    "substrate": {
+      "coupling": 1.0,
+      "graph_type": "chain",
+      "n_qubits": 5,
+      "seed": 1
+    }
+  }
+}
